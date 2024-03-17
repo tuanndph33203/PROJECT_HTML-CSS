@@ -60,7 +60,7 @@ img {
         @include m.breakpoint(sm) {
             @include m.grid(2, 30px);
         }
-        @include m.breakpoint(md) {
+        @include m.breakpoint(lg) {
             @include m.grid(4, 30px);
         }
     }
