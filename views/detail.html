@@ -12,7 +12,7 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
-  <link rel="stylesheet" href="../assets/style/home.scss" />
+  <link rel="stylesheet" href="../assets/style/shop.scss" />
   <link rel="stylesheet" href="../assets/style/header.scss" />
   <link rel="stylesheet" href="../assets/style/footer.scss" />
 </head>
@@ -44,10 +44,10 @@
         <nav class="mobile-menu">
           <ul class="mobile-menu__list">
             <li class="mobile-menu__item">
-              <a href="" class="mobile-menu__link">Home Mobile</a>
+              <a href="../index.html" class="mobile-menu__link">Home Mobile</a>
             </li>
             <li class="mobile-menu__item">
-              <a href="" class="mobile-menu__link">Shop</a>
+              <a href="./shop.html" class="mobile-menu__link">Shop</a>
             </li>
             <li class="mobile-menu__item">
               <a href="" class="mobile-menu__link">About</a>
@@ -65,7 +65,7 @@
               <a href="" class="mobile-menu__link">Wish List</a>
             </li>
             <li class="mobile-menu__item">
-              <a href="" class="mobile-menu__link">Cart</a>
+              <a href="./cart.html" class="mobile-menu__link">Cart</a>
             </li>
           </ul>
         </nav>
@@ -81,25 +81,37 @@
               <span><img src="../assets/image/icons/like.svg" /></span>
             </div>
             <div class="header-item-user">
-              <span><img src="../assets/image/icons/cart.svg" /></span>
+              <a href="./cart.html"><img src="../assets/image/icons/cart.svg" /></a>
             </div>
           </div>
         </div>
       </div>
   </header>
-  <section class="banner">
-    <img src="../assets/image/banner/home.svg" alt="" class="banner__img" />
-    <div class="banner-nav">
-      <h1 class="banner-nav__page">Shop</h1>
-      <div class="banner-nav-current">
-        <span class="nav__home"></span>
-        <img class="nav-arrow" src="assets/image/icons/arrow.svg" alt="">
-        <span class="nav__current"></span>
+  <!-- Search bar -->
+  <section class="search-bar">
+    <div class="container search-container">
+      <div class="search-above">
+          <div class="search-filter">
+            <img class="search__item" src="../assets/image/icons/filter.svg" alt="">
+            <span class="search__item">Filter</span>
+            <img class="search__item" src="../assets/image/icons/dot.svg" alt="">
+            <img class="search__item" src="../assets/image/icons/arrange.svg" alt="">
+          </div>
+          <span class="search__showing">Showing 1–16 of 32 results</span>
+      </div>
+      <div class="search-below">
+        <div class="search-show">
+          <span class="search__title">Show</span>
+          <div class="search__box">16</div>
+        </div>
+        <div class="search-short">
+          <span class="search__title">Short by</span>
+          <div class="search__box">Default</div>
+        </div>
       </div>
     </div>
   </section>
-  <!--End .banner-->
-
+ <!-- End search bar -->
   <section class="services">
     <div class="container-fluid">
       <div class="service-list">

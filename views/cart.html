@@ -100,7 +100,49 @@
     </div>
   </section>
   <!--End .banner-->
-
+  <section class="cart">
+    <div class="cart-container">
+      <div class="cart-list">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th colspan="2" class="cart__item">Product</th>
+              <th class="cart__item">Price</th>
+              <th class="cart__item">Quantity</th>
+              <th class="cart__item">Subtutal</th>
+              <th class="cart__item"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cart__item"><img src="../assets/image/product/Asgaard_sofa.svg" alt=""></td>
+              <td class="cart__item">Asgaard sofa</td>
+              <td class="cart__item" id="price">25000000</td>
+              <td class="cart__item"><input id="quantity" type="number" value="1"></td>
+              <td class="cart__item"><span id="sub">25000000</span></td>
+              <td class="cart__item"><button class="cart-bin"><img src="../assets/image/icons/bin.svg" alt=""></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cart-total">
+        <div class="cart-body">
+          <h1 class="cart__title">Cart Totals</h1>
+          <div class="cart-group">
+            <h4>Subtotal</h4>
+              <span id="sub-price">2500000</span>
+            </div>
+          </div>
+          <div class="cart-group">
+            <h4>Total</h4>
+              <span id="total-price">2500000</span>
+          </div>
+          <span class="cart-checkout">Check Out</span>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="services">
     <div class="container-fluid">
       <div class="service-list">
@@ -198,5 +240,5 @@
   </footer>
 </body>
 <script src="../assets/js/mobileMenu.js"></script>
-
+<script src="../assets/js/math.js"></script>
 </html>
