@@ -5,14 +5,14 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite App</title>
+  <title>Product</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
-  <link rel="stylesheet" href="../assets/style/shop.scss" />
+  <link rel="stylesheet" href="../assets/style/detail.scss" />
   <link rel="stylesheet" href="../assets/style/header.scss" />
   <link rel="stylesheet" href="../assets/style/footer.scss" />
 </head>
@@ -21,7 +21,7 @@
   <header class="header">
     <div class="container">
       <div class="header-inner">
-        <a href="" class="header__logo">
+        <a href="../index.html" class="header__logo">
           <img src="../assets/image/logo.svg" alt="" />
         </a>
         <div class="button-mobile"><button id="toggle-menu">=</button></div>
@@ -88,69 +88,278 @@
       </div>
   </header>
   <!-- Search bar -->
-  <section class="search-bar">
-    <div class="container search-container">
-      <div class="search-above">
-          <div class="search-filter">
-            <img class="search__item" src="../assets/image/icons/filter.svg" alt="">
-            <span class="search__item">Filter</span>
-            <img class="search__item" src="../assets/image/icons/dot.svg" alt="">
-            <img class="search__item" src="../assets/image/icons/arrange.svg" alt="">
-          </div>
-          <span class="search__showing">Showing 1–16 of 32 results</span>
-      </div>
-      <div class="search-below">
-        <div class="search-show">
-          <span class="search__title">Show</span>
-          <div class="search__box">16</div>
+  <section class="navbar">
+    <div class="container">
+      <span class="navbar__home">Home</span>
+      <img class="navbar__arrow" src="../assets/image/icons/arrow.svg" alt="">
+      <span class="navbar__next">Shop</span>
+      <img class="navbar__arrow" src="../assets/image/icons/arrow.svg" alt="">
+      <span class="navbar__current">Asgaard sofa</span>
+    </div>
+  </section>
+  <!-- start detail product -->
+  <section class="detail">
+    <div class="container">
+      <div class="image">
+        <div class="image-list">
+          <img src="../assets/image/detail/item1.svg" alt="" class="image__item">
+          <img src="../assets/image/detail/item2.svg" alt="" class="image__item">
+          <img src="../assets/image/detail/item3.svg" alt="" class="image__item">
+          <img src="../assets/image/detail/item4.svg" alt="" class="image__item">
         </div>
-        <div class="search-short">
-          <span class="search__title">Short by</span>
-          <div class="search__box">Default</div>
+        <img src="../assets/image/detail/item1.svg" alt="" id="image" class="image__main">
+      </div>
+      <div class="info">
+        <div class="info-product">
+          <h2 class="product__title">Asgaard sofa</h2>
+          <span class="info__price">25.000.000<sub>đ</sub></span>
+          <div class="star">
+            <div class="star-list">
+              <img class="star__item" src="../assets/image/detail/star.svg" alt="">
+              <img class="star__item" src="../assets/image/detail/star.svg" alt="">
+              <img class="star__item" src="../assets/image/detail/star.svg" alt="">
+              <img class="star__item" src="../assets/image/detail/star.svg" alt="">
+              <img class="star__item" src="../assets/image/detail/half_star.svg" alt="">
+            </div>
+            <span>5 Customer Review</span>
+          </div>
+          <p>Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero
+            with a well-balanced audio which boasts a clear midrange and extended highs for a sound.
+          </p>
+          <span class="info__title">Size</span>
+          <div class="size">
+            <div class="size__item">L</div>
+            <div class="size__item">XL</div>
+            <div class="size__item">XS</div>
+          </div>
+          <span>Color</span>
+          <div class="color">
+            <div class="color__item"></div>
+            <div class="color__item"></div>
+            <div class="color__item"></div>
+          </div>
+          <div class="action">
+            <div class="action-quantity">
+              <span id="minus">-</span>
+              <span id="quantity">1</span>
+              <span id="plus">+</span>
+            </div>
+            <a href="./cart.html" class="btn">Add To Cart</a>
+            <button >+ Compare</button>
+          </div>
+        </div>
+        <div class="info">
+          <div class="info-group">
+            <span class="info__title">SKU</span>
+            <div class="info-body">
+              <span class="info__2dots">:</span>
+              <span class="info__title">SS001</span>
+            </div>
+          </div>
+          <div class="info-group">
+            <span class="info__title">Category</span>
+            <div class="info-body">
+              <span class="info__2dots">:</span>
+              <span class="info__title">Sofas</span>
+            </div>
+          </div>
+          <div class="info-group">
+            <span class="info__title">Tags</span>
+            <div class="info-body">
+              <span class="info__2dots">:</span>
+              <span class="info__title">Sofa, Chair, Home, Shop</span>
+            </div>
+          </div>
+          <div class="info-group">
+            <span class="info__title">Share</span>
+            <div class="info-body">
+              <span class="info__2dots">:</span>
+              <div class="info-social">
+                <img src="../assets/image/icons/facebook.svg" alt="">
+                <img src="../assets/image/icons/instagram.svg" alt="">
+                <img src="../assets/image/icons/twitter.svg" alt="">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
- <!-- End search bar -->
-  <section class="services">
-    <div class="container-fluid">
-      <div class="service-list">
-        <div class="service-item">
-          <img src="../assets/image/icons/cup.svg" class="service__image" />
-          <div class="service-info">
-            <h4 class="service__name">High Quality</h4>
-            <p class="service__description">crafted from top materials</p>
-          </div>
+  <section class="illustration">
+    <div class="container">
+      <div class="illustration-group">
+        <div class="illustration-titles">
+          <h4 class="illustration__title">Description</h4>
+          <h4 class="illustration__title">Additional</h4>
+          <h4 class="illustration__title">Review [5]</h4>
         </div>
-        <!--End service-item-->
-        <div class="service-item">
-          <img src="../assets/image/icons/v.svg" class="service__image" />
-          <div class="service-info">
-            <h4 class="service__name">High Quality</h4>
-            <p class="service__description">crafted from top materials</p>
-          </div>
+        <div class="illustration-items">
+          <p class="illustration__item">
+            Embodying the raw, wayward spirit of rock ‘n’ roll, the Kilburn portable active stereo speaker takes the
+            unmistakable look and sound of Marshall, unplugs the chords, and takes the show on the road.
+            <br><br>
+            Weighing in under 7 pounds, the Kilburn is a lightweight piece of vintage styled engineering. Setting the
+            bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a
+            well-balanced audio which boasts a clear midrange and extended highs for a sound that is both articulate and
+            pronounced. The analogue knobs allow you to fine tune the controls to your personal preferences while the
+            guitar-influenced leather strap enables easy and stylish travel.
+          </p>
+          <p class="illustration__item"></p>
+          <p class="illustration__item"></p>
         </div>
-        <!--End service-item-->
-        <div class="service-item">
-          <img src="../assets/image/icons/ship.svg" class="service__image" />
-          <div class="service-info">
-            <h4 class="service__name">High Quality</h4>
-            <p class="service__description">crafted from top materials</p>
-          </div>
-        </div>
-        <!--End service-item-->
-        <div class="service-item">
-          <img src="../assets/image/icons/contact.svg" class="service__image" />
-          <div class="service-info">
-            <h4 class="service__name">High Quality</h4>
-            <p class="service__description">crafted from top materials</p>
-          </div>
-        </div>
-        <!--End service-item-->
+      </div>
+      <div class="illustration-banner">
+        <img src="../assets/image/detail/banner1.svg" alt="">
+        <img src="../assets/image/detail/banner1.svg" alt="">
       </div>
     </div>
   </section>
-  <!--End .services-->
+  <section class="product">
+    <div class="container">
+      <div class="section-heading">
+        <h2 class="section-heading__title">Related Products</h2>
+      </div>
+      <div class="section-body">
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-image">
+              <img src="../assets/image/product/image 1.svg" alt="" class="product__thumbnail" />
+              <span class="product-sale">30%</span>
+            </div>
+            <div class="product-info">
+              <h3 class="product__name">
+                <a href="" class="product__link">Syltherine</a>
+              </h3>
+              <a href="" class="product__category">Stylish cafe chair</a>
+              <div class="product-price">
+                <span class="product-price__new">3.500.000 <sup>đ</sup></span>
+                <span class="product-price__old">5.000.000 <sup>đ</sup></span>
+              </div>
+            </div>
+            <div class="product-actions">
+              <a href="./views/detail.html" class="btn product-action__quickview">View Product</a>
+              <button class="btn product-action__addtocart">Add To Cart</button>
+              <div class="product-actions-more">
+                <div class="product-action-more-share">
+                  <img class="product-action-more__icon" src="./assets/image/icons/share.svg" alt="">
+                  <span>Share</span>
+                </div>
+                <div class="product-action-more-compare">
+                  <img class="product-action-more__icon" src="./assets/image/icons/compare.svg" alt="">
+                </div>
+                <div class="product-action-more-like">
+                  <img class="product-action-more__icon" src="./assets/image/icons/love.svg" alt="">
+                  <span>Like</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--End .product-item-->
+          <div class="product-item">
+            <div class="product-image">
+              <img src="../assets/image/product/images.svg" alt="" class="product__thumbnail" />
+            </div>
+            <div class="product-info">
+              <h3 class="product__name">
+                <a href="" class="product__link">Laviosa</a>
+              </h3>
+              <a href="" class="product__category">Stylish cafe chair</a>
+              <div class="product-price">
+                <span class="product-price__new">2.500.000 <sup>đ</sup></span>
+              </div>
+            </div>
+            <div class="product-actions">
+              <a href="./views/detail.html" class="btn product-action__quickview">View Product</a>
+              <button class="btn product-action__addtocart">Add To Cart</button>
+              <div class="product-actions-more">
+                <div class="product-action-more-share">
+                  <img class="product-action-more__icon" src="./assets/image/icons/share.svg" alt="">
+                  <span>Share</span>
+                </div>
+                <div class="product-action-more-compare">
+                  <img class="product-action-more__icon" src="./assets/image/icons/compare.svg" alt="">
+                </div>
+                <div class="product-action-more-like">
+                  <img class="product-action-more__icon" src="./assets/image/icons/love.svg" alt="">
+                  <span>Like</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--End .product-item-->
+          <div class="product-item">
+            <div class="product-image">
+              <img src="../assets/image/product/image 3.svg" alt="" class="product__thumbnail" />
+              <span class="product-sale">50%</span>
+            </div>
+            <div class="product-info">
+              <h3 class="product__name">
+                <a href="" class="product__link">Lolito</a>
+              </h3>
+              <a href="" class="product__category">Luxury big sofa</a>
+              <div class="product-price">
+                <span class="product-price__new">5.000.000 <sup>đ</sup></span>
+                <span class="product-price__old">2.500.000 <sup>đ</sup></span>
+              </div>
+            </div>
+            <div class="product-actions">
+              <a href="./views/detail.html" class="btn product-action__quickview">View Product</a>
+              <button class="btn product-action__addtocart">Add To Cart</button>
+              <div class="product-actions-more">
+                <div class="product-action-more-share">
+                  <img class="product-action-more__icon" src="./assets/image/icons/share.svg" alt="">
+                  <span>Share</span>
+                </div>
+                <div class="product-action-more-compare">
+                  <img class="product-action-more__icon" src="./assets/image/icons/compare.svg" alt="">
+                </div>
+                <div class="product-action-more-like">
+                  <img class="product-action-more__icon" src="./assets/image/icons/love.svg" alt="">
+                  <span>Like</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--End .product-item-->
+          <div class="product-item">
+            <div class="product-image">
+              <img src="../assets/image/product/image 4.svg" alt="" class="product__thumbnail" />
+              <span class="product-new">New</span>
+            </div>
+            <div class="product-info">
+              <h3 class="product__name">
+                <a href="" class="product__link">Respira</a>
+              </h3>
+              <a href="" class="product__category">Outdoor bar table and stool</a>
+              <div class="product-price">
+                <span class="product-price__new">3.500.000 <sup>đ</sup></span>
+              </div>
+            </div>
+            <div class="product-actions">
+              <a href="./views/detail.html" class="btn product-action__quickview">View Product</a>
+              <button class="btn product-action__addtocart">Add To Cart</button>
+              <div class="product-actions-more">
+                <div class="product-action-more-share">
+                  <img class="product-action-more__icon" src="./assets/image/icons/share.svg" alt="">
+                  <span>Share</span>
+                </div>
+                <div class="product-action-more-compare">
+                  <img class="product-action-more__icon" src="./assets/image/icons/compare.svg" alt="">
+                </div>
+                <div class="product-action-more-like">
+                  <img class="product-action-more__icon" src="./assets/image/icons/love.svg" alt="">
+                  <span>Like</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--End .product-item-->
+        </div>
+        <span class="product__more">Show More</span>
+      </div>
+    </div>
+  </section>
+  <!-- End search bar -->
   <footer class="footer">
     <div class="container">
       <div class="footer-list">
@@ -209,5 +418,5 @@
   </footer>
 </body>
 <script src="../assets/js/mobileMenu.js"></script>
-
+<script src="../assets/js/detail.js"></script>
 </html>
