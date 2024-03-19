@@ -136,7 +136,9 @@ img {
         justify-content: space-between;
         align-items: center;
     }
-    &-checkout{
+    &__checkout{
+        color: black;
+        text-decoration: none;
         display: inline-block;
         width: 220px;
         text-align: center;

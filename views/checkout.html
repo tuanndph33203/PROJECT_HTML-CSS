@@ -3,16 +3,16 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/svg+xml" href="/header.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout</title>
+  <title>Cart</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
-  <link rel="stylesheet" href="../assets/style/home.scss" />
+  <link rel="stylesheet" href="../assets/style/checkout.scss" />
   <link rel="stylesheet" href="../assets/style/header.scss" />
   <link rel="stylesheet" href="../assets/style/footer.scss" />
 </head>
@@ -31,7 +31,7 @@
               <a href="../index.html" class="main-menu__link">Home</a>
             </li>
             <li class="main-menu__item">
-              <a href="" class="main-menu__link">Shop</a>
+              <a href="./shop.html" class="main-menu__link">Shop</a>
             </li>
             <li class="main-menu__item">
               <a href="" class="main-menu__link">About</a>
@@ -44,10 +44,10 @@
         <nav class="mobile-menu">
           <ul class="mobile-menu__list">
             <li class="mobile-menu__item">
-              <a href="" class="mobile-menu__link">Home Mobile</a>
+              <a href="../index.html" class="mobile-menu__link">Home Mobile</a>
             </li>
             <li class="mobile-menu__item">
-              <a href="" class="mobile-menu__link">Shop</a>
+              <a href="./shop.html" class="mobile-menu__link">Shop</a>
             </li>
             <li class="mobile-menu__item">
               <a href="" class="mobile-menu__link">About</a>
@@ -65,7 +65,7 @@
               <a href="" class="mobile-menu__link">Wish List</a>
             </li>
             <li class="mobile-menu__item">
-              <a href="" class="mobile-menu__link">Cart</a>
+              <a href="./cart.html" class="mobile-menu__link">Cart</a>
             </li>
           </ul>
         </nav>
@@ -81,7 +81,7 @@
               <span><img src="../assets/image/icons/like.svg" /></span>
             </div>
             <div class="header-item-user">
-              <span><img src="../assets/image/icons/cart.svg" /></span>
+              <a href="./cart.html"><img src="../assets/image/icons/cart.svg" /></a>
             </div>
           </div>
         </div>
@@ -90,16 +90,122 @@
   <section class="banner">
     <img src="../assets/image/banner/home.svg" alt="" class="banner__img" />
     <div class="banner-nav">
-      <h1 class="banner-nav__page">Shop</h1>
-      <div class="banner-nav-current">
-        <span class="nav__home"></span>
-        <img class="nav-arrow" src="assets/image/icons/arrow.svg" alt="">
-        <span class="nav__current"></span>
+      <img class="banner-nav__logo" src="../assets/image/banner/logo.svg" alt="">
+      <h1 class="banner-nav__page">Checkout</h1>
+      <div class="banner-nav-sub">
+        <span class="banner-nav-sub__home">Home</span>
+        <img class="banner-nav-sub__arrow" src="../assets/image/icons/arrow.svg" alt="">
+        <span class="banner-nav-sub__current">Checkout</span>
       </div>
     </div>
   </section>
   <!--End .banner-->
-
+  <section class="checkout">
+    <div class="container">
+      <div class="checkout-boxs">
+        <h2>Billing details</h2>
+        <div class="checkout-names">
+          <div class="checkout-name">
+            <h5>Firt Name</h5>
+            <input class="checkout-input" type="text">
+          </div>
+          <div class="checkout-name">
+            <h5>Last Name</h5>
+            <input class="checkout-input" type="text">
+          </div>
+        </div>
+        <div class="checkout-box">
+          <h5>Company Name (Optional)</h5>
+          <input type="text" id="">
+        </div>
+        <div class="checkout-box">
+          <h5>Country / Region</h5>
+          <select name="" id="">
+            <option value="">Sri Lanka</option>
+            <option value="">New York</option>
+            <option value="">Washington DC</option>
+          </select>
+        </div>
+        <div class="checkout-box">
+          <h5>Street Address</h5>
+          <input type="text" id="">
+        </div>
+        <div class="checkout-box">
+          <h5>Town / City</h5>
+          <select name="" id="">
+            <option value="">Western Province</option>
+            <option value="">Eastern Province</option>
+            <option value="">Northern Province</option>
+            <option value="">Southern Province</option>
+          </select>
+        </div>
+        <div class="checkout-box">
+          <h5>Zip Code</h5>
+          <input type="text" id="">
+        </div>
+        <div class="checkout-box">
+          <h5>Phone</h5>
+          <input type="text" id="">
+        </div>
+        <div class="checkout-box">
+          <h5>Email</h5>
+          <input type="text" id="">
+        </div>
+        <div class="checkout-box">
+          <input type="text" id="checkout-email" placeholder="Additional information">
+        </div>
+      </div>
+      <div class="checkout-boxs">
+        <div class="order">
+          <div class="order-price">
+            <h4>Product</h4>
+            <span>Asgaard sofa <strong>x 1</strong> </span>
+            <span>Subtotal</span>
+            <span>Total</span>
+          </div>
+          <div class="order-price">
+            <h4>Subtotal</h4>
+            <span>25.000.000<sub>đ</sub></span>
+            <span>250.000.000<sub>đ</sub></span>
+            <h3>250.000.000<sub>đ</sub></h3>
+          </div>
+        </div>
+        <div class="order-more">
+          <div class="order-ship">
+            <div class="order-bank">
+              <div class="order-bank-title">
+                <div class="order__circle black"></div>
+                <h4>Direct Bank Transfer</h4>
+              </div>
+              <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.
+                Your
+                order will not be shipped until the funds have cleared in our account.</p>
+            </div>
+            <div class="order-bank">
+              <div class="order-bank-title">
+                <div class="order__circle"></div>
+                <h4>Pay anytime</h4>
+              </div>
+              <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.
+                Your order will not be shipped until the funds have cleared in our account.</p>
+            </div>
+            <div class="order-bank">
+              <div class="order-bank-title">
+                <div class="order__circle"></div>
+                <h4>Cash On Deliverygt</h4>
+              </div>
+              <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.
+                Your order will not be shipped until the funds have cleared in our account.</p>
+            </div>
+            <div class="order-btn">
+              <h5>Place Order</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End checkout -->
   <section class="services">
     <div class="container-fluid">
       <div class="service-list">
@@ -197,5 +303,6 @@
   </footer>
 </body>
 <script src="../assets/js/mobileMenu.js"></script>
+<script src="../assets/js/math.js"></script>
 
 </html>
