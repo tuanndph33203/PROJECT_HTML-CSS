@@ -24,7 +24,13 @@
         <a href="../index.html" class="header__logo">
           <img src="../assets/image/logo.svg" alt="" />
         </a>
-        <div class="button-mobile"><button id="toggle-menu">=</button></div>
+        <div class="button-mobile">
+          <button id="toggle-menu">
+            <hr>
+            <hr>
+            <hr>
+          </button>
+        </div>
         <nav class="main-menu">
           <ul class="main-menu__list">
             <li class="main-menu__item">
@@ -71,9 +77,9 @@
         </nav>
         <div class="header-items">
           <div class="header-items">
-            <div class="header-item-user">
-              <span><img src="../assets/image/icons/account.svg" /></span>
-            </div>
+            <btn class="header-item-user" onclick="handleUser()">
+              <img src="../assets/image/icons/account.svg" />
+            </btn>
             <div class="header-item-user">
               <span><img src="../assets/image/icons/search.svg" /></span>
             </div>
@@ -120,10 +126,10 @@
         </div>
         <div class="checkout-box">
           <h5>Country / Region</h5>
-          <select name="" id="">
-            <option value="">Sri Lanka</option>
-            <option value="">New York</option>
-            <option value="">Washington DC</option>
+          <select class="grey">
+            <option>Sri Lanka</option>
+            <option>New York</option>
+            <option>Washington DC</option>
           </select>
         </div>
         <div class="checkout-box">
@@ -132,11 +138,11 @@
         </div>
         <div class="checkout-box">
           <h5>Town / City</h5>
-          <select name="" id="">
-            <option value="">Western Province</option>
-            <option value="">Eastern Province</option>
-            <option value="">Northern Province</option>
-            <option value="">Southern Province</option>
+          <select class="grey" name="" id="">
+            <option>Eastern Province</option>
+            <option>Northern Province</option>
+            <option>Southern Province</option>
+            <option>Western Province</option>
           </select>
         </div>
         <div class="checkout-box">
@@ -159,7 +165,9 @@
         <div class="order">
           <div class="order-price">
             <h4>Product</h4>
-            <span>Asgaard sofa <strong>x 1</strong> </span>
+            <div class="order-quantity">
+              <span class="grey">Asgaard sofa &nbsp;</span><strong>x 1</strong>
+            </div>
             <span>Subtotal</span>
             <span>Total</span>
           </div>
@@ -174,29 +182,34 @@
           <div class="order-ship">
             <div class="order-bank">
               <div class="order-bank-title">
-                <div class="order__circle black"></div>
-                <h4>Direct Bank Transfer</h4>
+                <div class="order__circle black" onclick="toggleContent(0, this)"></div>
+                <h4 class="order__title">Direct Bank Transfer</h4>
               </div>
-              <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.
-                Your
-                order will not be shipped until the funds have cleared in our account.</p>
+              <p class="grey order__content active">Make your payment directly into our bank account. Please use your
+                Order ID
+                as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+              </p>
             </div>
             <div class="order-bank">
               <div class="order-bank-title">
-                <div class="order__circle"></div>
-                <h4>Pay anytime</h4>
+                <div class="order__circle" onclick="toggleContent(1, this)"></div>
+                <h4 class="order__title grey">Pay anytime</h4>
               </div>
-              <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.
-                Your order will not be shipped until the funds have cleared in our account.</p>
+              <p class="grey order__content">Make your payment directly into our bank account. Please use your Order ID
+                as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+              </p>
             </div>
             <div class="order-bank">
               <div class="order-bank-title">
-                <div class="order__circle"></div>
-                <h4>Cash On Deliverygt</h4>
+                <div class="order__circle" onclick="toggleContent(2, this)"></div>
+                <h4 class="order__title grey">Cash On Delivery</h4>
               </div>
-              <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.
-                Your order will not be shipped until the funds have cleared in our account.</p>
+              <p class="grey order__content">Make your payment directly into our bank account. Please use your Order ID
+                as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+              </p>
             </div>
+            <p>Your personal data will be used to support your experience throughout this website, to manage access to
+              your account, and for other purposes described in our <strong>privacy policy.</strong></p>
             <div class="order-btn">
               <h5>Place Order</h5>
             </div>
@@ -301,8 +314,96 @@
       <p class="copyright">2023 furino. All rights reverved</p>
     </div>
   </footer>
+  <div class="login" id="user">
+    <div class="login-form">
+      <div class="login-close">
+        <strong class="login__close" id="close">X</strong>
+      </div>
+      <div class="login-boxs">
+        <div class="login-title">
+          <div class="login__title">Login</div>
+        </div>
+        <div class="login-box">
+          <div class="login-user">
+            <h5>Username</h5>
+            <input type="text" name="" id="">
+          </div>
+          <div class="login-user">
+            <h5>Password</h5>
+            <input type="text" name="" id="">
+          </div>
+        </div>
+        <div class="login-btn">
+          <button>Login</button>
+        </div>
+        <div class="login-box">
+          <div class="login-social">
+            <img src="../assets/image/icons/facebook-f.svg" alt="">
+            <h5>Facebook</h5>
+          </div>
+          <div class="login-social">
+            <img src="../assets/image/icons/google.svg" alt="">
+            <h5>Google</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
-<script src="../assets/js/mobileMenu.js"></script>
-<script src="../assets/js/math.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var menu = document.querySelector(".mobile-menu");
+    var toggleBtn = document.getElementById("toggle-menu");
+    menu.style.display = "none";
+    toggleBtn.addEventListener("click", function () {
+      if (menu.style.display === "none") {
+        menu.style.display = "block";
+      } else {
+        menu.style.display = "none";
+      }
+    });
+    window.addEventListener("resize", function () {
+      var windowWidth = window.innerWidth;
+      if (windowWidth >= 992) {
+        menu.style.display = "none";
+      }
+    });
+  });
+  function toggleContent(index, circle) {
+    var contents = document.querySelectorAll('.order__content');
+    contents.forEach(function (content, i) {
+      if (i === index) {
+        content.classList.toggle('active');
+      } else {
+        content.classList.remove('active');
+      }
+    });
+
+    var circles = document.querySelectorAll('.order__circle');
+    circles.forEach(function (circleElement, i) {
+      if (i === index) {
+        circleElement.classList.add('black');
+      } else {
+        circleElement.classList.remove('black');
+      }
+    });
+    var circles = document.querySelectorAll('.order__title');
+    circles.forEach(function (circleElement, i) {
+      if (i === index) {
+        circleElement.classList.remove('grey');
+      } else {
+        circleElement.classList.add('grey');
+      }
+    });
+  }
+  var toggleBtn = document.getElementById("user");
+  var close = document.getElementById("close");
+  toggleBtn.style.display = "none";
+  function handleUser() {
+    toggleBtn.style.display = "flex";
+  }
+  close.addEventListener("click", function () {
+    toggleBtn.style.display = "none";
+  });</script>
 
 </html>

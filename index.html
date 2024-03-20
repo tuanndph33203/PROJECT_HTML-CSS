@@ -24,7 +24,13 @@
         <a href="../index.html" class="header__logo">
           <img src="./assets/image/logo.svg" alt="" />
         </a>
-        <div class="button-mobile"><button id="toggle-menu">=</button></div>
+        <div class="button-mobile">
+          <button id="toggle-menu">
+            <hr>
+            <hr>
+            <hr>
+          </button>
+        </div>
         <nav class="main-menu">
           <ul class="main-menu__list">
             <li class="main-menu__item">
@@ -71,14 +77,14 @@
         </nav>
         <div class="header-items">
           <div class="header-items">
-            <div class="header-item-user">
-              <span><img src="./assets/image/icons/account.svg" /></span>
-            </div>
+            <btn class="header-item-user" onclick="handleUser()">
+              <img src="./assets/image/icons/account.svg" />
+            </btn>
             <div class="header-item-user">
               <span><img src="./assets/image/icons/search.svg" /></span>
             </div>
-            <div class="header-item-user">
-              <span><img src="./assets/image/icons/like.svg" /></span>
+            <div>
+              <img src="./assets/image/icons/like.svg" />
             </div>
             <div class="header-item-user">
               <span><img src="./assets/image/icons/cart.svg" /></span>
@@ -150,7 +156,7 @@
               </div>
             </div>
             <div class="product-actions">
-             <a href="./views/detail.html" class="btn product-action__quickview">View Product</a>
+              <a href="./views/detail.html" class="btn product-action__quickview">View Product</a>
               <button class="btn product-action__addtocart">Add To Cart</button>
               <div class="product-actions-more">
                 <div class="product-action-more-share">
@@ -184,7 +190,7 @@
               </div>
             </div>
             <div class="product-actions">
-             <a href="./views/detail.html" class="btn product-action__quickview">View Product</a>
+              <a href="./views/detail.html" class="btn product-action__quickview">View Product</a>
               <button class="btn product-action__addtocart">Add To Cart</button>
               <div class="product-actions-more">
                 <div class="product-action-more-share">
@@ -217,7 +223,7 @@
               </div>
             </div>
             <div class="product-actions">
-             <a href="./views/detail.html" class="btn product-action__quickview">View Product</a>
+              <a href="./views/detail.html" class="btn product-action__quickview">View Product</a>
               <button class="btn product-action__addtocart">Add To Cart</button>
               <div class="product-actions-more">
                 <div class="product-action-more-share">
@@ -447,6 +453,71 @@
       <p class="copyright">2023 furino. All rights reverved</p>
     </div>
   </footer>
+  <div class="login" id="user">
+    <div class="login-form">
+      <div class="login-close">
+        <strong class="login__close" id="close">X</strong>
+      </div>
+      <div class="login-boxs">
+        <div class="login-title">
+          <div class="login__title">Login</div>
+        </div>
+        <div class="login-box">
+          <div class="login-user">
+            <h5>Username</h5>
+            <input type="text" name="" id="">
+          </div>
+          <div class="login-user">
+            <h5>Password</h5>
+            <input type="text" name="" id="">
+          </div>
+        </div>
+        <div class="login-btn">
+          <button>Login</button>
+        </div>
+        <div class="login-box">
+          <div class="login-social">
+            <img src="./assets/image/icons/facebook-f.svg" alt="">
+            <h5>Facebook</h5>
+          </div>
+          <div class="login-social">
+            <img src="./assets/image/icons/google.svg" alt="">
+            <h5>Google</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
-<script src="./assets/js/mobileMenu.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var menu = document.querySelector(".mobile-menu");
+    var toggleBtn = document.getElementById("toggle-menu");
+    menu.style.display = "none";
+    toggleBtn.addEventListener("click", function () {
+      if (menu.style.display === "none") {
+        menu.style.display = "block";
+      } else {
+        menu.style.display = "none";
+      }
+    });
+    window.addEventListener("resize", function () {
+      var windowWidth = window.innerWidth;
+      if (windowWidth >= 992) {
+        menu.style.display = "none";
+      }
+    });
+  });
+  var toggleBtn = document.getElementById("user");
+  var close = document.getElementById("close");
+  toggleBtn.style.display = "none";
+  function handleUser() {
+    toggleBtn.style.display = "flex";
+  }
+  close.addEventListener("click", function () {
+    toggleBtn.style.display = "none";
+  });
+
+</script>
+
 </html>
