@@ -62,7 +62,7 @@
               <a href="" class="mobile-menu__link">Contact</a>
             </li>
             <li class="mobile-menu__item">
-              <a href="" class="mobile-menu__link">Account</a>
+              <btn onclick="handleUser()" class="mobile-menu__link">Account</b>
             </li>
             <li class="mobile-menu__item">
               <a href="" class="mobile-menu__link">Search</a>
@@ -281,8 +281,8 @@
   </div>
 </body>
 <script>
+  var menu = document.querySelector(".mobile-menu");
   document.addEventListener("DOMContentLoaded", function () {
-    var menu = document.querySelector(".mobile-menu");
     var toggleBtn = document.getElementById("toggle-menu");
     menu.style.display = "none";
     toggleBtn.addEventListener("click", function () {
@@ -324,10 +324,11 @@
       currency: "VND",
     }).format(amount);
   }
-  var toggleBtn = document.getElementById("user");
+   var toggleBtn = document.getElementById("user");
   var close = document.getElementById("close");
   toggleBtn.style.display = "none";
   function handleUser() {
+    menu.style.display = "none";
     toggleBtn.style.display = "flex";
   }
   close.addEventListener("click", function () {
