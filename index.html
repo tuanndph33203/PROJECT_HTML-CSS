@@ -508,15 +508,15 @@
       }
     });
   });
-  var toggleBtn = document.getElementById("user");
-  var close = document.getElementById("close");
-  toggleBtn.style.display = "none";
+  var login = document.getElementById("user");
+  login.style.display = "none";
   function handleUser() {
+    console.log("2");
     menu.style.display = "none";
-    toggleBtn.style.display = "flex";
+    login.style.display = "flex";
   }
-  close.addEventListener("click", function () {
-    toggleBtn.style.display = "none";
+  document.getElementById("close").addEventListener("click", function () {
+    login.style.display = "none";
   });
 
 </script>
