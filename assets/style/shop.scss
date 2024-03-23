@@ -18,9 +18,10 @@ img {
 //Banner
 .banner {
     position: relative;
+    height: 316px;
       &__img {
           width: 100%;
-          height: 316px;
+          height: 100%;
           object-fit: cover;
       }
       &-nav{
