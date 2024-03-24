@@ -1,0 +1,64 @@
+@use "_mixin.scss" as m;
+.preloader{
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    padding: 0 30px;
+    @include m.breakpoint(md){
+        padding: 0 70px;
+    }
+    &-group{
+        display: flex;
+        img{
+            width: 40px;
+            height: 40px;
+        }
+    }
+    &-item{
+        display: flex;
+        align-items: center;
+        line-height: 60px;
+        margin-right: 50px;
+       
+        .logo{
+            width: 40px;
+            height: 40px;
+        }
+        .search{
+            width: 20px;
+            height: 20px;
+        }
+        input{
+            border: none;
+            height: 25px;
+        }
+        &:last-child{
+            display: none;
+            @include m.breakpoint(md){
+                display: flex;
+            }
+        }
+    }
+    &-title{
+        display: none;
+        @include m.breakpoint(md){
+            display: inline;
+        }
+    }
+    &-author{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        img{
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+        }
+    }
+    &-info{
+        h4{
+            margin: 5px 0;
+        }
+    }
+}

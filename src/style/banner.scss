@@ -1,0 +1,24 @@
+@use "_mixin.scss" as m;
+.banner {
+    position: relative;
+    height: 316px;
+      &__img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+      }
+      &-nav{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        &__page{
+          font-size: 48px;
+        }
+        &__current{
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+  }

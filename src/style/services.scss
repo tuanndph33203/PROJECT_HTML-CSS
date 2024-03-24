@@ -1,0 +1,29 @@
+@use "_mixin.scss" as m;
+.service-list {
+    background: #faf3ea;
+    padding: 10% 15px 10% 15px;
+    @include m.grid(2, 30px);
+    @include m.breakpoint(lg) {
+        @include m.grid(4, 30px);
+        padding: 107px 10% 93px 10%;
+    }
+    .service-item {
+        display: block;
+        text-align: center;
+        @include m.breakpoint(sm) {
+            display: grid;
+            grid-template-columns: 60px auto;
+            grid-gap: 10px;
+            text-align: left;
+        }
+    }
+    .service__name {
+        font-size: 25px;
+        color: #242424;
+        margin: 0;
+    }
+    .service__description {
+        color: #898989;
+        margin-top: 10px;
+    }
+}

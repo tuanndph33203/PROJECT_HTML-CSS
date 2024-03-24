@@ -1,0 +1,102 @@
+@use "_mixin.scss" as m;
+.header {
+    position: relative;
+    &-inner {
+        padding: 28px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @include m.breakpoint(lg) {
+        }
+    }
+    &-inner > * {
+        flex: 1;
+    }
+    &-items {
+        display: none;
+        @include m.breakpoint(lg) {
+            display: flex;
+            justify-content: flex-end;
+        }
+        img{
+            cursor: pointer;
+        }
+    }
+    &-items > * {
+        margin-left: 37px;
+    }
+}
+.button-mobile {
+    display: none; // Hide by default on larger screens
+    text-align: right;
+    display: inline-block;
+    @include m.breakpoint(lg) {
+        display: none;
+    }
+    button {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        hr {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: #333; 
+            margin: 5px auto;
+        }
+    }
+}
+.main-menu {
+    display: none;
+    @include m.breakpoint(lg) {
+        display: block;
+    }
+    &__list {
+        display: block;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+    }
+    &__link {
+        font-size: 18px;
+        display: block;
+        padding: 10px 35px;
+        text-decoration: none;
+        color: #000;
+    }
+    &__link:hover {
+        color: #fff;
+        background: #000;
+    }
+}
+.mobile-menu {
+    z-index: 999;
+    opacity: 0.7;
+    display: none;
+    @include m.breakpoint(lg) {
+        display: none;
+    }
+    position: absolute;
+    background-color: #000000;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    &__list {
+        display: block;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    &__link {
+        font-size: 18px;
+        display: block;
+        padding: 10px 35px;
+        text-decoration: none;
+        color: #ffffff;
+    }
+    &__link:hover {
+        color: #b88e2f;
+    }
+}

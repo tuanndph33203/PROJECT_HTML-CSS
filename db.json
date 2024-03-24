@@ -1,0 +1,17 @@
+{
+  "products": [
+    {
+      "id": "21",
+      "name": "Product 20",
+      "tag": "Product_20",
+      "price": 3000,
+      "image": "item2.svg",
+      "description": "This is product 20",
+      "discount": 40,
+      "active": true,
+      "featured": false,
+      "inStock": 200,
+      "category": "Category"
+    }
+  ]
+}

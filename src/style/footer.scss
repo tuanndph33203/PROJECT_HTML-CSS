@@ -1,0 +1,56 @@
+@use "_mixin.scss" as m;
+.footer {
+    padding: 39px 0;
+    &-list {
+        @include m.grid(1, 30px);
+
+        @include m.breakpoint(lg) {
+            @include m.grid(3, 30px);
+        }
+    }
+    &__address {
+        color: #9f9f9f;
+    }
+    &-nav {
+        @include m.grid(2, 30px);
+    }
+    &__title {
+        font-size: 16px;
+        color: #9f9f9f;
+        font-weight: normal;
+        margin-bottom: 59px;
+    }
+    &-menu-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    &-menu-item {
+        margin-bottom: 20px;
+    }
+    &-menu-link {
+        text-decoration: none;
+        color: #000;
+    }
+}
+.newsletter {
+    &__input {
+        border: 1px solid transparent;
+        border-bottom: 1px solid #000;
+        padding: 5px 10px;
+        &:focus {
+            outline: none;
+        }
+    }
+    &__btn {
+        border: 1px solid transparent;
+        border-bottom: 1px solid #000;
+        padding: 5px 10px;
+        background: none;
+        cursor: pointer;
+    }
+}
+
+.section-blog-heading {
+    margin-bottom: 66px;
+}
