@@ -1,17 +1,31 @@
 {
   "products": [
     {
-      "id": "21",
-      "name": "Product 20",
-      "tag": "Product_20",
-      "price": 3000,
-      "image": "item2.svg",
-      "description": "This is product 20",
-      "discount": 40,
+      "id": "e6f1",
+      "name": "Tuân12",
+      "price": 1212,
+      "tag": "Tuân12",
+      "image": "item3.svg",
+      "description": "121323",
+      "discount": 12,
       "active": true,
-      "featured": false,
-      "inStock": 200,
-      "category": "Category"
+      "featured": true,
+      "inStock": 1,
+      "category": "2"
+    }
+  ],
+  "category": [
+    {
+      "id": "1",
+      "name": "Category 1"
+    },
+    {
+      "id": "2",
+      "name": "Category 2"
+    },
+    {
+      "id": "3",
+      "name": "Category 3"
     }
   ]
 }

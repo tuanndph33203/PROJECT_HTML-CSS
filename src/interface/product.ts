@@ -1,13 +1,13 @@
 export interface IProduct{
-    id:number,
-    name: String,
+    id?:number | string,
+    name: string,
     price: number,
-    tag: String,
-    image: String,
-    description: String,
+    tag: string,
+    image: string,
+    description: string,
     discount: number,
-    active: Boolean,
-    featured: Boolean,
+    active: boolean,
+    featured: boolean,
     inStock: number,
-    category:String
+    category:string
 }

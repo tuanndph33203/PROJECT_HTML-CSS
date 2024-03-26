@@ -1,20 +1,19 @@
 import { getAllProducts, getProductByTag, getProductLimit } from "@/services/product";
 import { useQuery } from "@tanstack/react-query";
 
-const useProductQuery = ({tag,quantity}: {tag?:string , quantity?: number}) => {
+const useProductQuery = ({ tag, quantity }: { tag?: string, quantity?: number }) => {
     const { data, ...rest } = useQuery({
-        queryKey: ["PRODUCT_KEY",tag],
+        queryKey: ["PRODUCT_KEY", tag],
         queryFn: async () => {
             if (tag) {
                 return await getProductByTag(tag);
-            } else if(quantity){
+            } else if (quantity) {
                 return await getProductLimit(quantity); 
-            }else{
+            } else {
                 return await getAllProducts();
             }
         },
     });
-
     return { data, ...rest };
 };
 
