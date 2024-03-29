@@ -1,8 +1,4 @@
 import Joi from "joi";
-import User from "../models/user";
-import bcryptjs from "bcryptjs";
-import { StatusCodes } from "http-status-codes";
-
 const signupSchema = Joi.object({
     name: Joi.string().min(3).max(30).required().messages({
         "any.required": "Trường Name là bắt buộc",
@@ -30,37 +26,4 @@ const signupSchema = Joi.object({
     }),
 });
 
-export const signup = async (req, res) => {
-    const { email, password, name, avatar } = req.body;
-    console.log(req.body);
-    const { error } = signupSchema.validate(req.body, { abortEarly: false });
-    console.log(error);
-    if (error) {
-        const messages = error.details.map((item) => item.message);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-            messages,
-        });
-    }
-
-    const existUser = await User.findOne({ email });
-    if (existUser) {
-        return res.status(StatusCodes.BAD_REQUEST).json({
-            messages: ["Email đã tồn tại"],
-        });
-    }
-
-    const hashedPassword = await bcryptjs.hash(password, 12);
-    const role = (await User.countDocuments({})) === 0 ? "admin" : "user";
-
-    const user = await User.create({
-        ...req.body,
-        password: hashedPassword,
-        role,
-    });
-
-    return res.status(StatusCodes.CREATED).json({
-        user,
-    });
-};
-export const signin = async (req, res) => {};
-export const logout = async (req, res) => {};
+export {signupSchema}

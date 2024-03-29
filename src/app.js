@@ -1,22 +1,31 @@
 import cors from "cors";
-import dotenv from "dotenv";
 import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 import morgan from "morgan";
+import bodyParser from "body-parser";
 
-import { connectDB } from "./config/db";
-import authRouter from "./routers/auth";
+import routes from "./routers";
+dotenv.config();
+
+const connectDB = async () => { 
+    try {
+      await mongoose.connect(process.env.DB_URL);
+      console.log("Connect successfully!!!");
+    } catch (error) {
+      console.log("Connect failure!!!");
+    }
+}
+connectDB();
 
 const app = express();
-dotenv.config();
-// middleware
 app.use(express.json());
 app.use(cors());
 app.use(morgan("tiny"));
+app.use(express.static("public"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// connect db
-connectDB(process.env.DB_URI);
-
-// routers
-app.use("/api/v1", authRouter);
+routes(app);
 
 export const viteNodeApp = app;
