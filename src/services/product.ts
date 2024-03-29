@@ -5,23 +5,23 @@ import { IProduct } from "@/interface/product";
 export const getAllProducts = async () => {
     try {
         const response = await axiosInstance.get(`http://localhost:3000/products`);
-        return response.data
+        return response.data.data
     } catch (error) {
         console.log(error);
     }
 }
 export const getProductByTag = async (tag: string) => {
     try {
-        const response = await axiosInstance.get(`http://localhost:3000/products?tag=${tag}`);
-        return response.data[0];
+        const response = await axiosInstance.get(`http://localhost:3000/products/${tag}`);
+        return response.data.data;
     } catch (error) {
         console.log(error);
     }
 }
 export const getProductLimit = async (quantity: number) => {
     try {
-        const response = await axiosInstance.get(`http://localhost:3000/products?_limit=${quantity}`);
-        return response.data
+        const response = await axiosInstance.get(`http://localhost:3000/products/limit/${quantity}`);
+        return response.data.data
     } catch (error) {
         console.log(error);
     }

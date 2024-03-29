@@ -4,18 +4,17 @@ import "@/style/detail.scss"
 import { Link, useParams } from "react-router-dom"
 const Product = () => {
     const {tag} = useParams();
-    const { data, isLoading, isError } = useProductQuery({tag});
+    const { data:product, isLoading, isError } = useProductQuery({ tag });
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error</p>;
-    const product = data[0];
     return (
         <>
             <section className="navbar">
                 <div className="container">
                     <span className="navbar__home">Home</span>
-                    <img className="navbar__arrow" src="../assets/image/icons/arrow.svg" />
+                    <img className="navbar__arrow" src="/assets/image/icons/arrow.svg" />
                     <span className="navbar__next">Shop</span>
-                    <img className="navbar__arrow" src="../assets/image/icons/arrow.svg" />
+                    <img className="navbar__arrow" src="/assets/image/icons/arrow.svg" />
                     <span className="navbar__current">{product.name}</span>
                 </div>
             </section>
@@ -24,12 +23,12 @@ const Product = () => {
                 <div className="container">
                     <div className="image">
                         <div className="image-list">
-                            <img src="../assets/image/detail/item1.svg" className="image__item" />
-                            <img src="../assets/image/detail/item2.svg" className="image__item" />
-                            <img src="../assets/image/detail/item3.svg" className="image__item" />
-                            <img src="../assets/image/detail/item4.svg" className="image__item" />
+                            <img src="/assets/image/detail/item1.svg" className="image__item" />
+                            <img src="/assets/image/detail/item2.svg" className="image__item" />
+                            <img src="/assets/image/detail/item3.svg" className="image__item" />
+                            <img src="/assets/image/detail/item4.svg" className="image__item" />
                         </div>
-                        <img src={`../assets/image/detail/${product.image}`} id="image" className="image__main" />
+                        <img src={`/assets/image/detail/${product.image}`} id="image" className="image__main" />
                     </div>
                     <div className="info">
                         <div className="info-product">
@@ -37,11 +36,11 @@ const Product = () => {
                             <span className="info__price">{product.price - product.discount*product.price/100}<sub>đ</sub></span>
                             <div className="star">
                                 <div className="star-list"> 
-                                    <img className="star__item" src="../assets/image/detail/star.svg" />
-                                    <img className="star__item" src="../assets/image/detail/star.svg" />
-                                    <img className="star__item" src="../assets/image/detail/star.svg" />
-                                    <img className="star__item" src="../assets/image/detail/star.svg" />
-                                    <img className="star__item" src="../assets/image/detail/half_star.svg" />
+                                    <img className="star__item" src="/assets/image/detail/star.svg" />
+                                    <img className="star__item" src="/assets/image/detail/star.svg" />
+                                    <img className="star__item" src="/assets/image/detail/star.svg" />
+                                    <img className="star__item" src="/assets/image/detail/star.svg" />
+                                    <img className="star__item" src="/assets/image/detail/half_star.svg" />
                                 </div>
                                 <span>5 Customer Review</span>
                             </div>
@@ -97,9 +96,9 @@ const Product = () => {
                                 <div className="info-body">
                                     <span className="info__2dots">:</span>
                                     <div className="info-social">
-                                        <img src="../assets/image/icons/facebook.svg" />
-                                        <img src="../assets/image/icons/instagram.svg" />
-                                        <img src="../assets/image/icons/twitter.svg" />
+                                        <img src="/assets/image/icons/facebook.svg" />
+                                        <img src="/assets/image/icons/instagram.svg" />
+                                        <img src="/assets/image/icons/twitter.svg" />
                                     </div>
                                 </div>
                             </div>

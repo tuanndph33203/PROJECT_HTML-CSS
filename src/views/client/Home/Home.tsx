@@ -15,7 +15,7 @@ const Home = () => {
           </div>
           <div className="section-body">
             <div className="product-list">
-              {data.map((value: any, index: number): any => {
+              {data && data.map((value: any, index: number): any => {
                 return (
                   <div key={index} className="product-item">
                     <div className="product-image">

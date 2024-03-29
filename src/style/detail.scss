@@ -6,6 +6,9 @@
     height: auto;
     font-size: 20px;
     padding: 30px 0;
+    .container{
+        display: flex;
+    }
     &__arrow{
         margin: 0 15px;
     }
@@ -68,9 +71,12 @@
         }
         .star{
             margin: 23px 0;
-            display: flex;
             line-height: 23px;
             font-size: 13;
+            display: flex;
+            &-list{
+                display: flex;
+            }
             &-list{
                 border-right: 1px solid black;
                 padding-right: 15px;

@@ -3,6 +3,7 @@ import "@/style/shop.scss"
 import { Link } from "react-router-dom"
 const Shop = () => {
     const { data, isLoading, isError } = useProductQuery({});
+    console.log(data);
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error</p>;
     return (
@@ -37,7 +38,7 @@ const Shop = () => {
                 <div className="container">
                     <div className="section-body">
                         <div className="product-list">
-                            {data.map((value: any, index: number): any => {
+                            {data && data.map((value: any, index: number): any => {
                                 return (
                                     <div key={index} className="product-item">
                                         <div className="product-image">

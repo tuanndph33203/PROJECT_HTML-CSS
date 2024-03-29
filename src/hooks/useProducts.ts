@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const useProductQuery = ({ tag, quantity }: { tag?: string, quantity?: number }) => {
     const { data, ...rest } = useQuery({
-        queryKey: ["PRODUCT_KEY", tag],
+        queryKey: ["PRODUCT_KEY"],
         queryFn: async () => {
             if (tag) {
                 return await getProductByTag(tag);
