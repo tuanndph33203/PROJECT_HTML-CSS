@@ -1,14 +1,17 @@
+import Toast from "@/components/Toast";
 import { login, register } from "@/services/auth";
 import { useMutation } from "@tanstack/react-query";
+
 type useAuthMutationProps = {
     action: "REGISTER" | "LOGIN";
 }
-const useAuthMutation = ({action} : useAuthMutationProps) => {
+
+const useAuthMutation = ({ action }: useAuthMutationProps) => {
     const { mutate, ...rest } = useMutation({
-        mutationFn: async (user:any) => {
+        mutationFn: async (user: any) => {
             switch (action) {
                 case "REGISTER":
-                     return await register({
+                    return await register({
                         name: user.name,
                         email: user.email,
                         password: user.password,
@@ -16,13 +19,26 @@ const useAuthMutation = ({action} : useAuthMutationProps) => {
                         avatar: user.avatar,
                     });
                 case "LOGIN":
-                     return await login({
+                    return await login({
                         email: user.email,
                         password: user.password
                     });
                 default:
-                    return null
+                    return null;
             }
+        },
+        onSuccess: (data: any) => {
+            console.log("Success data:", data);
+            Toast({type:"success",report:data.message})
+        },
+        onError: (error: any) => {
+            console.log(error.response.data.message);
+            
+            const message = error.response.data.message;
+            console.log(message);
+            message.map((value:string) => {
+                Toast({type:"error",report:value})
+            })  
         }
     });
 

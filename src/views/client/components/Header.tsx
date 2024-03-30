@@ -1,6 +1,10 @@
 import "@/style/header.scss";
 import { Link } from "react-router-dom";
 function Header(props: any) {
+    const handleOpen = () => {
+        props.login(true)
+        props.setMenu(false)
+    }
     return (
         <header className="header">
             <div className="container">
@@ -46,7 +50,7 @@ function Header(props: any) {
                                 <Link to="/" className="mobile-menu__link">Contact</Link>
                             </li>
                             <li className="mobile-menu__item">
-                                <Link onClick={() => props.login(true)} to="/" className="mobile-menu__link">Account
+                                <Link onClick={handleOpen} to="/" className="mobile-menu__link">Account
                                 </Link>
                             </li>
                             <li className="mobile-menu__item">
@@ -63,7 +67,7 @@ function Header(props: any) {
                     <div className="header-items">
                         <div className="header-items">
                             <div className="header-item-user">
-                                <img onClick={() => props.login(true)} src="./assets/image/icons/account.svg" />
+                                <img onClick={handleOpen} src="./assets/image/icons/account.svg" />
                             </div>
                             <div className="header-item-user">
                                 <span><img src="./assets/image/icons/search.svg" /></span>

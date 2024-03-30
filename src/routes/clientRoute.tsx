@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import User from '@/views/client/components/User';
+import User from '@/views/client/components/User/User';
 import { Header, Footer, Banner, Services } from '@/views/client/components/index';
 import { useState } from 'react';
 import Home from '@/views/client/Home/Home';

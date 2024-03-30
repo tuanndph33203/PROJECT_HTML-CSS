@@ -35,7 +35,7 @@ const ProductCreate = () => {
         if (fileName) {
             setProduct({
                 ...product,
-                image: fileName // Set the image property correctly
+                image: fileName 
             });
             setSelectedFileName(fileName);
         }
