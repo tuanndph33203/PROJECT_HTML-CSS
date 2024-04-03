@@ -1,23 +1,32 @@
 import { StatusCodes } from "http-status-codes";
 
-// import { productSchema } from "../validate/product";
+import { productSchema } from "../validate/product";
 import ProductModel from "../models/product.js";
-
+import { populate } from "dotenv";
 const ProductController = {
-  Create : async (req, res) => {
+  Create: async (req, res) => {
     try {
-      const { name, image, discount, description, stock, category } = req.body;
-      // const { error } = productSchema.validate(
-      //   { name, image, sizes, discount, description, color, stock, category },
-      //   { abortEarly: false }
-      // );
-      // if (error) {
-      //   res.status(StatusCodes.BAD_REQUEST).json({
-      //     message: error.details.map((value) => {
-      //       return value.message;
-      //     }),
-      //   });
-      // }
+      const {
+        name,
+        price,
+        image,
+        discount,
+        description,
+        stock,
+        category,
+        attributes,
+      } = req.body;
+      const { error } = productSchema.validate(
+        { name, price, image, discount, description, stock, category },
+        { abortEarly: false }
+      );
+      if (error) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: error.details.map((value) => {
+            return value.message;
+          }),
+        });
+      }
       const existedName = await ProductModel.findOne({ name: name });
       if (existedName) {
         return res.status(StatusCodes.BAD_REQUEST).json({
@@ -27,10 +36,12 @@ const ProductController = {
       const product = await ProductModel.create({
         name,
         tag: name.replace(/\s/g, "_"),
+        price,
         image,
         discount,
         description,
         stock,
+        attributes,
         category,
       });
       return res.status(StatusCodes.CREATED).json({
@@ -43,9 +54,14 @@ const ProductController = {
       });
     }
   },
-  All : async (req, res) => {
+  All: async (req, res) => {
     try {
-      const products = await ProductModel.find();
+      const products = await ProductModel.find().populate({
+        path: 'attributes',
+        populate: {
+          path: 'values'
+        }
+      });
       res.status(StatusCodes.OK).json({
         message: "Lấy tất cả sản phẩm thành công !",
         data: products,
@@ -56,10 +72,19 @@ const ProductController = {
       });
     }
   },
-  Limit : async (req, res) => {
+  
+  Limit: async (req, res) => {
     try {
-      const limit = parseInt(req.params.limit); 
-      const latestProducts = await ProductModel.find().sort({ createdAt: -1 }).limit(limit);
+      const limit = parseInt(req.params.limit);
+      const latestProducts = await ProductModel.find()
+        .sort({ createdAt: -1 })
+        .limit(limit)
+        .populate({
+          path: 'attributes',
+          populate: {
+            path: 'values'
+          }
+        });;
       res.status(StatusCodes.OK).json({
         message: `Lấy ${limit} sản phẩm thành công !`,
         data: latestProducts,
@@ -70,10 +95,15 @@ const ProductController = {
       });
     }
   },
-  Detail : async (req, res) => {
+  Detail: async (req, res) => {
     try {
       const tag = req.params.tag;
-      const product = await ProductModel.findOne({ tag: tag });
+      const product = await ProductModel.findOne({ tag: tag }).populate({
+        path: 'attributes',
+        populate: {
+          path: 'values'
+        }
+      });;
       if (!product) {
         return res.status(StatusCodes.BAD_REQUEST).json({
           message: "Sản phẩm không tồn tại !",
@@ -82,7 +112,7 @@ const ProductController = {
       res.status(StatusCodes.OK).json({
         message: "Lấy sản phẩm thành công !",
         data: product,
-        tag
+        tag,
       });
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -90,7 +120,7 @@ const ProductController = {
       });
     }
   },
-  Delete : async (req, res) => {
+  Delete: async (req, res) => {
     try {
       const existingProduct = await ProductModel.findById(req.params.id);
       if (!existingProduct) {
@@ -108,21 +138,43 @@ const ProductController = {
       });
     }
   },
-  Update : async (req, res) => {
+  Update: async (req, res) => {
     try {
       const productId = req.params.id;
-      const { name, image, discount, description, stock, category } = req.body;
       const existingProduct = await ProductModel.findById(productId);
       if (!existingProduct) {
         return res.status(StatusCodes.NOT_FOUND).json({
           message: "Không tìm thấy sản phẩm !",
         });
       }
+      const {
+        name,
+        price,
+        image,
+        discount,
+        description,
+        stock,
+        category,
+        attributes,
+      } = req.body;
+      const { error } = productSchema.validate(
+        { name, price, image, discount, description, stock, category },
+        { abortEarly: false }
+      );
+      if (error) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: error.details.map((value) => {
+            return value.message;
+          }),
+        });
+      }
       existingProduct.name = name;
       existingProduct.image = image;
+      existingProduct.price = price;
       existingProduct.discount = discount;
       existingProduct.description = description;
       existingProduct.stock = stock;
+      existingProduct.attributes = attributes;
       existingProduct.category = category;
       await existingProduct.save();
 
@@ -135,7 +187,7 @@ const ProductController = {
         message: "Error" + error,
       });
     }
-  }
+  },
 };
 
 export default ProductController;

@@ -1,32 +1,37 @@
 import bcryptjs from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
-import { signupSchema } from "../validate/auth";
-import UserModel from "./../models/user";
+import { signinSchema, signupSchema } from "../validate/auth";
+import UserModel from "../models/user.js";
+import jwt from "jsonwebtoken";
 
 const UserController = {
   Register: async (req, res) => {
     try {
       const { email, password, name, avatar, confirmPassword } = req.body;
-      const { error } = signupSchema.validate({ email, password, name, avatar, confirmPassword }, { abortEarly: false });
+      const { error } = signupSchema.validate(
+        { name,email,  password, confirmPassword, avatar},
+        { abortEarly: false }
+      );
       if (error) {
-          return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-              messages: error.details.map((item) => item.message),
-          });
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: error.details.map((value) => {
+            return value.message;
+          }),
+        });
       }
       const existUser = await UserModel.findOne({ email });
       if (existUser) {
         return res.status(StatusCodes.BAD_REQUEST).json({
-          messages: "Email đã tồn tại !",
+          message: "Email đã tồn tại !",
         });
       }
       if (password !== confirmPassword) {
         return res.status(StatusCodes.BAD_REQUEST).json({
-          messages: "Mật khẩu không trùng nhau !",
+          message: "Mật khẩu không trùng nhau !",
         });
       }
       const hashedPassword = await bcryptjs.hash(password, 12);
-      const role =
-        (await UserModel.countDocuments({})) === 0 ? "admin" : "user";
+      const role = (await UserModel.countDocuments({})) === 0 ? "admin" : "user";
       const user = await UserModel.create({
         name,
         email,
@@ -35,8 +40,8 @@ const UserController = {
         role,
       });
       return res.status(StatusCodes.CREATED).json({
-        messages: "Đăng ký tài khoản thành công !",
-        user: { ...user.toObject(), password: undefined },
+        message: "Đăng ký tài khoản thành công !",
+        user: { ...user.toObject(),email : undefined ,password: undefined },
       });
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -47,17 +52,17 @@ const UserController = {
   Login: async (req, res) => {
     try {
       const { email, password } = req.body;
-      //   const { error } = loginShema.validate(
-      //     { email, password },
-      //     { abortEarly: false }
-      //   );
-      //   if (error) {
-      //     return res.status(400).json({
-      //       message: error.details.map((value) => {
-      //         return value.message;
-      //       }),
-      //     });
-      //   }
+        const { error } = signinSchema.validate(
+          { email, password },
+          { abortEarly: false }
+        );
+        if (error) {
+          return res.status(StatusCodes.BAD_REQUEST).json({
+            message: error.details.map((value) => {
+              return value.message;
+            }),
+          });
+        }
       const user = await UserModel.findOne({ email });
       if (!user) {
         return res.status(StatusCodes.BAD_REQUEST).json({
@@ -70,12 +75,13 @@ const UserController = {
           message: "Mật khẩu không đúng !",
         });
       }
-      //   const token = jwt.sign({ user: user._id }, "tuanndph33203", {
-      //     expiresIn: "1w",
-      //   });
+      const token = jwt.sign({ user: user._id }, process.env.KEY, {
+        expiresIn: "1w",
+      }); 
       return res.status(StatusCodes.OK).json({
         message: "Đăng Nhập Thành Công !",
         user: { ...user.toObject(), password: undefined },
+        token,
       });
     } catch (error) {
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
