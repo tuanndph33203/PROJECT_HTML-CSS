@@ -1,5 +1,4 @@
 import { StatusCodes } from "http-status-codes";
-
 import { productSchema } from "../validate/product";
 import ProductModel from "../models/product.js";
 import { populate } from "dotenv";
