@@ -1,12 +1,13 @@
 import Toast from "@/components/Toast";
 import { login, register } from "@/services/auth";
 import { useMutation } from "@tanstack/react-query";
+import { useSessionStorage } from "@/hooks/useStorage";
 
 type useAuthMutationProps = {
     action: "REGISTER" | "LOGIN";
 }
-
 const useAuthMutation = ({ action }: useAuthMutationProps) => {
+    const [session, setSession] = useSessionStorage('user', '');
     const { mutate, ...rest } = useMutation({
         mutationFn: async (user: any) => {
             switch (action) {
@@ -27,13 +28,14 @@ const useAuthMutation = ({ action }: useAuthMutationProps) => {
                     return null;
             }
         },
-        onSuccess: (data: any) => {
+        onSuccess: async (data: any) => {
+            setSession(data.user);
             console.log("Success data:", data);
-            Toast({type:"success",report:data.message})
+            Toast({ type: "success", report: data.message });
         },
         onError: (error: any) => {
+            console.log(error);
             console.log(error.response.data.message);
-            
             const message = error.response.data.message;
             console.log(message);
             message.map((value:string) => {
@@ -42,7 +44,7 @@ const useAuthMutation = ({ action }: useAuthMutationProps) => {
         }
     });
 
-    return { mutate, ...rest };
+    return { mutate, session, ...rest }; 
 };
 
 export default useAuthMutation;

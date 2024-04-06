@@ -5,7 +5,7 @@ export const register = async (user: any) => {
         const response = await axiosInstance.post(`http://localhost:3000/auth/register`, user);
         return response.data;
     } catch (error) {
-        throw error;
+     
     }
 }
 

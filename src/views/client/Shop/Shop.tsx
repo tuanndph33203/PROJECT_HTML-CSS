@@ -56,7 +56,7 @@ const Shop = () => {
                                             </div>
                                         </div>
                                         <div className="product-actions">
-                                            <Link to={`/product/${value.tag}`} className="btn product-action__quickview">View Product</Link>
+                                            <Link to={`/product/${value.slug}`} className="btn product-action__quickview">View Product</Link>
                                             <button className="btn product-action__addtocart">Add To Cart</button>
                                             <div className="product-actions-more">
                                                 <div className="product-action-more-share">

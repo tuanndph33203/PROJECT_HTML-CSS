@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createProduct, deleteProduct, updateProduct } from "@/services/product";
 import { IProduct } from "@/interface/product";
+import Toast from "@/components/Toast";
 type useProductMutationProps = {
     action: "CREATE" | "UPDATE" | "DELETE";
 }
@@ -13,13 +14,13 @@ const useProductMutation = ({action} : useProductMutationProps) => {
                     await createProduct({
                         name: product.name,
                         price: product.price,
-                        tag: product.name.replace(/\s/g, '_'),
+                        tags : product.tags,
+                        gallery : product.gallery,
+                        attributes : product.attributes,
                         image: product.image,
                         description: product.description,
                         discount: product.discount,
-                        active: true,
-                        featured: true,
-                        inStock: product.inStock,
+                        featured: false,
                         category:product.category
                     });
                     break;
@@ -33,11 +34,19 @@ const useProductMutation = ({action} : useProductMutationProps) => {
                     return null
             }
         },
-        onSuccess: () => {
+        onSuccess: (data:any) => {
             queryClient.invalidateQueries({
                 queryKey: ["PRODUCT_KEY"],
             });
+            Toast({ type: "success", report: data.message });
         },
+        onError: (error: any) => {
+            console.log(error);
+            const message = error.response.data.message;
+            message.map((value:string) => {
+            Toast({type:"error",report:value})
+            })  
+        }
     });
 
     return { mutate, ...rest };

@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import User from '@/views/client/components/User/User';
-import { Header, Footer, Banner, Services } from '@/views/client/components/index';
+import { Header, Footer, Banner, Services } from '@/views/client/components/ui/index';
 import { useState } from 'react';
 import Home from '@/views/client/Home/Home';
 import Cart from '@/views/client/Cart/Cart';
@@ -25,7 +25,7 @@ function Client() {
         <Route path='/' element={<Home />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<Checkout />} />
-        <Route path='/product/:tag' element={<Product />} />
+        <Route path='/product/:slug' element={<Product />} />
         <Route path='/shop' element={<Shop />} />
       </Routes>
       <Services></Services>

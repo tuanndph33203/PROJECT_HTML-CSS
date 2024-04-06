@@ -8,7 +8,6 @@ const useCategoryQuery = () => {
             return await getAllCategory();
         },
     });
-
     return { data, ...rest };
 };
 

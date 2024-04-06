@@ -5,6 +5,6 @@ export const getAllCategory = async () => {
         const response = await axiosInstance.get(`http://localhost:3000/category`);
         return response.data
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 }

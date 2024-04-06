@@ -1,13 +1,14 @@
-export interface IProduct{
-    id?:number | string,
+export interface IProduct {
+    _id?: number | string,
     name: string,
+    slug?: string,
     price: number,
-    tag: string,
+    tags: string[],
+    gallery: string[], 
+    attributes: any[], 
     image: string,
     description: string,
     discount: number,
-    active: boolean,
     featured: boolean,
-    inStock: number,
-    category:string
+    category: string
 }

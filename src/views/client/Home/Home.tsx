@@ -2,8 +2,9 @@ import useProductQuery from "@/hooks/useProducts";
 import "@/style/style.scss";
 import { Link } from "react-router-dom";
 const Home = () => {
-  const { data, isLoading, isError } = useProductQuery({quantity:4});
+  const { data, isLoading, isError } = useProductQuery({ quantity: 4 });
   console.log(data);
+  
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error</p>;
   return (
@@ -33,7 +34,7 @@ const Home = () => {
                       </div>
                     </div>
                     <div className="product-actions">
-                      <Link to={`/product/${value.tag}`} className="btn product-action__quickview">View Product</Link>
+                      <Link to={`/product/${value.slug}`} className="btn product-action__quickview">View Product</Link>
                       <button className="btn product-action__addtocart">Add To Cart</button>
                       <div className="product-actions-more">
                         <div className="product-action-more-share">

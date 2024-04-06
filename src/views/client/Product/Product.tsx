@@ -1,10 +1,12 @@
-
 import useProductQuery from "@/hooks/useProducts";
 import "@/style/detail.scss"
 import { Link, useParams } from "react-router-dom"
 const Product = () => {
-    const {tag} = useParams();
-    const { data:product, isLoading, isError } = useProductQuery({ tag });
+    const { slug } = useParams();
+    console.log(slug);
+
+    const { data: product, isLoading, isError } = useProductQuery({ slug });
+    console.log(product);
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error</p>;
     return (
@@ -23,19 +25,20 @@ const Product = () => {
                 <div className="container">
                     <div className="image">
                         <div className="image-list">
-                            <img src="/assets/image/detail/item1.svg" className="image__item" />
-                            <img src="/assets/image/detail/item2.svg" className="image__item" />
-                            <img src="/assets/image/detail/item3.svg" className="image__item" />
-                            <img src="/assets/image/detail/item4.svg" className="image__item" />
+                            {product.gallery.map((value: string, index: number) => {
+                                return (
+                                    <img key={index} src={`/assets/image/product/${value}`} className="image__item" />
+                                )
+                            })}
                         </div>
-                        <img src={`/assets/image/detail/${product.image}`} id="image" className="image__main" />
+                        <img src={`/assets/image/product/${product.image}`} id="image" className="image__main" />
                     </div>
                     <div className="info">
                         <div className="info-product">
                             <h2 className="product__title">{product.name}</h2>
-                            <span className="info__price">{product.price - product.discount*product.price/100}<sub>đ</sub></span>
+                            <span className="info__price">{product.price - product.discount * product.price / 100}<sub>đ</sub></span>
                             <div className="star">
-                                <div className="star-list"> 
+                                <div className="star-list">
                                     <img className="star__item" src="/assets/image/detail/star.svg" />
                                     <img className="star__item" src="/assets/image/detail/star.svg" />
                                     <img className="star__item" src="/assets/image/detail/star.svg" />
@@ -47,17 +50,16 @@ const Product = () => {
                             <p>Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero
                                 with a well-balanced audio which boasts a clear midrange and extended highs for a sound.
                             </p>
-                            <span className="info__title">Size</span>
-                            <div className="size">
-                                <div className="size__item">L</div>
-                                <div className="size__item">XL</div>
-                                <div className="size__item">XS</div>
-                            </div>
-                            <span>Color</span>
-                            <div className="color">
-                                <div className="color__item" />
-                                <div className="color__item" />
-                                <div className="color__item" />
+
+                            <div className="mt-4">
+                                <span >Color</span>
+                                {product.attributes.map((attribute: { values: { nameValue: string }[] }, index: number) => (
+                                    <div className="color" key={index}>
+                                        {attribute.values.map((value: { nameValue: string }, idx: number) => (
+                                            <div key={idx} style={{ backgroundColor: value.nameValue }} className="color__item" />
+                                        ))}
+                                    </div>
+                                ))}
                             </div>
                             <div className="action">
                                 <div className="action-quantity">
@@ -88,7 +90,9 @@ const Product = () => {
                                 <span className="info__title">Tags</span>
                                 <div className="info-body">
                                     <span className="info__2dots">:</span>
-                                    <span className="info__title">Sofa, Chair, Home, Shop</span>
+                                    <span className="info__title">{product.tags.map((value: string) => {
+                                        return value + ",";
+                                    })}</span>
                                 </div>
                             </div>
                             <div className="info-group">

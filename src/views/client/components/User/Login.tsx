@@ -1,7 +1,10 @@
 import useAuthMutation from "@/hooks/useAuth";
-
-const Login =  (props: any)  => {
-    const { mutate } = useAuthMutation({ action: "LOGIN" });
+import { useEffect } from "react";
+const Login = (props: any) => {
+    const { mutate, session } = useAuthMutation({ action: "LOGIN" });
+    useEffect(() => {
+        props.setLogin(true);
+    },[session])
     const handleLogin = async (e: any) => {
         e.preventDefault();
         const formData = new FormData(e.target);

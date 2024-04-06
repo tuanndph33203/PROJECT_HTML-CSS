@@ -34,6 +34,12 @@
         @include m.breakpoint(xl){
             @include m.grid(2,25px);
         }
+        &-list{
+            display: flex;
+            @include m.breakpoint(xl){
+               display: block;
+            }
+        }
         &__item{
             max-width: 76px;
             height: 80px;
@@ -117,15 +123,6 @@
                 height: 30px;
                 border-radius: 50%;
                 margin-right: 16px;
-                &:first-child {
-                    background-color: #816DFA;
-                }
-                &:nth-child(2) {
-                    background-color: #000000;
-                }
-                &:last-child {
-                    background-color: #B88E2F;
-                }
             }
         }
         .action{
