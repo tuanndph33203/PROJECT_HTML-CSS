@@ -4,7 +4,7 @@ import { CheckPermission } from '../middlewares/authenticate';
 const productRouter = express.Router();
 productRouter.get("/",ProductController.All);
 productRouter.get("/limit/:limit", ProductController.Limit);
-productRouter.get("/:tag",ProductController.Detail);
+productRouter.get("/:slug",ProductController.Detail);
 productRouter.post("/", ProductController.Create);
 productRouter.put("/:id", ProductController.Update);
 productRouter.delete("/:id",ProductController.Delete); 

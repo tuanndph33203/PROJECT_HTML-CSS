@@ -16,29 +16,35 @@ var productSchema = _joi["default"].object({
     "string.min": "Trường Name phải có ít nhất {#limit} ký tự",
     "string.max": "Trường Name không được vượt quá {#limit} ký tự"
   }),
-  price: _joi["default"].number().min(1000).max(999999999).required().messages({
-    "any.required": "Trường Price là bắt buộc",
-    "string.empty": "Trường Price không được để trống",
-    "string.min": "Trường Price phải có ít nhất {#limit}",
-    "string.max": "Trường Name không được vượt quá {#limit}"
+  tags: _joi["default"].array().min(1).required().messages({
+    "any.required": "Attributes là trường bắt buộc.",
+    "array.min": "Ít nhất phải có một thuộc tính."
   }),
-  email: _joi["default"].string().email().required().messages({
-    "any.required": "Trường Email là bắt buộc",
-    "string.empty": "Trường Email không được để trống",
-    "string.email": "Trường Email phải là email hợp lệ"
+  gallery: _joi["default"].array().min(1).required().messages({
+    "any.required": "Attributes là trường bắt buộc.",
+    "array.min": "Ít nhất phải có một thuộc tính."
   }),
-  password: _joi["default"].string().min(6).max(30).required().messages({
-    "any.required": "Trường Password là bắt buộc",
-    "string.empty": "Trường Password không được để trống",
-    "string.min": "Trường Password phải có ít nhất {#limit} ký tự",
-    "string.max": "Trường Password không được vượt quá {#limit} ký tự"
+  attributes: _joi["default"].array().min(1).required().messages({
+    "any.required": "Attributes là trường bắt buộc.",
+    "array.min": "Ít nhất phải có một thuộc tính."
   }),
-  confirmPassword: _joi["default"].string().required().valid(_joi["default"].ref("password")).messages({
-    "any.required": "Trường Confirm Password là bắt buộc",
-    "any.only": "Mật khẩu không trùng khớp"
+  image: _joi["default"].string().required().messages({
+    "any.required": "Trường Image là bắt buộc",
+    "string.empty": "Trường Image không được để trống"
   }),
-  avatar: _joi["default"].string().uri().messages({
-    "string.uri": "Trường Avatar phải là đường dẫn hợp lệ"
+  discount: _joi["default"].number().min(0).max(100).required().messages({
+    "any.required": "Trường Discount là bắt buộc",
+    "number.empty": "Trường Discount không được để trống",
+    "number.min": "Trường Discount phải có giá trị tối thiểu {#limit}",
+    "number.max": "Trường Discount không được vượt quá {#limit}"
+  }),
+  description: _joi["default"].string().required().messages({
+    "any.required": "Trường Description là bắt buộc",
+    "string.empty": "Trường Description không được để trống"
+  }),
+  category: _joi["default"].string().required().messages({
+    "any.required": "Trường Category là bắt buộc",
+    "string.empty": "Trường Category không được để trống"
   })
 });
 

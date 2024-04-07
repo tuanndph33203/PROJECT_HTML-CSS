@@ -13,62 +13,31 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var Product = new _mongoose.Schema({
+var AttributeSchema = new _mongoose.Schema({
   name: {
     type: String,
-    required: true,
-    maxlength: 200,
-    minlength: 6,
-    unique: true
+    unum: ['Color', 'Size'],
+    "default": 'Color'
   },
-  slug: {
-    type: String,
-    required: true
-  },
-  tags: {
-    type: Array
-  },
-  image: {
-    type: String,
-    required: true
-  },
-  gallery: {
-    type: Array
-  },
-  price: {
-    type: Number,
-    "default": 1,
-    min: 1000,
-    max: 999999999
-  },
-  discount: {
-    type: Number,
-    "default": 0,
-    min: 0,
-    max: 100
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  featured: {
-    type: Boolean,
-    "default": false
-  },
-  attributes: [{
-    type: _mongoose["default"].Schema.Types.ObjectId,
-    ref: "Attribute"
-  }],
-  category: {
-    type: _mongoose.Schema.Types.ObjectId,
-    ref: "categories"
-  }
+  values: [{
+    nameValue: {
+      type: String,
+      required: true
+    },
+    price: {
+      type: Number,
+      required: true
+    },
+    stock: {
+      type: Number,
+      required: true
+    }
+  }]
 }, {
-  timestamps: true,
+  timestamps: false,
   versionKey: false
 });
 
-var ProductModel = _mongoose["default"].model("products", Product);
+var _default = _mongoose["default"].model("Attribute", AttributeSchema);
 
-var _default = ProductModel;
 exports["default"] = _default;
