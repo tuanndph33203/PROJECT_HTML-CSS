@@ -42,34 +42,37 @@ var createAttribute = function createAttribute(data) {
 exports.createAttribute = createAttribute;
 
 var updateAttribute = function updateAttribute(data) {
-  var attribute, _updateAttribute;
+  var existAttribute, _updateAttribute;
 
   return regeneratorRuntime.async(function updateAttribute$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
-          attribute = new _attribute["default"]({
-            values: data
-          });
-          _context2.next = 4;
-          return regeneratorRuntime.awrap(attribute.save());
+          _context2.next = 3;
+          return regeneratorRuntime.awrap(_attribute["default"].findById(data._id));
 
-        case 4:
+        case 3:
+          existAttribute = _context2.sent;
+          existAttribute.values = data.values;
+          _context2.next = 7;
+          return regeneratorRuntime.awrap(existAttribute.save());
+
+        case 7:
           _updateAttribute = _context2.sent;
           return _context2.abrupt("return", _updateAttribute);
 
-        case 8:
-          _context2.prev = 8;
+        case 11:
+          _context2.prev = 11;
           _context2.t0 = _context2["catch"](0);
           return _context2.abrupt("return", _context2.t0.message);
 
-        case 11:
+        case 14:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 8]]);
+  }, null, null, [[0, 11]]);
 };
 
 exports.updateAttribute = updateAttribute;

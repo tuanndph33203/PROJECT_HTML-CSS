@@ -12,10 +12,9 @@ export const createAttribute = async (data) => {
 };
 export const updateAttribute = async (data) => {
     try {
-        const attribute = new Attribute({
-            values : data
-        });
-        const updateAttribute = await attribute.save();
+        const existAttribute = await Attribute.findById(data._id)
+        existAttribute.values = data.values
+        const updateAttribute = await existAttribute.save();
         return updateAttribute;
     } catch (error) {
         return error.message;

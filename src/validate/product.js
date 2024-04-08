@@ -17,7 +17,7 @@ const productSchema = Joi.object({
   }),
   attributes: Joi.array().min(1).required().messages({
     "any.required": "Attributes là trường bắt buộc.",
-    "array.min": "Ít nhất phải có một thuộc tính.",
+    "array.min": "Attributes Ít nhất phải có một thuộc tính.",
   }),
   image: Joi.string().required().messages({
     "any.required": "Trường Image là bắt buộc",
@@ -32,6 +32,11 @@ const productSchema = Joi.object({
   description: Joi.string().required().messages({
     "any.required": "Trường Description là bắt buộc",
     "string.empty": "Trường Description không được để trống",
+  }),
+  featured : Joi.boolean().messages({
+    "any.required": "Trường featured là bắt buộc",
+    "any.only": "Trường featured chỉ có thể là true hoặc false",
+    "boolean.base": "Trường featured phải là một giá trị boolean"
   }),
   category: Joi.string().required().messages({
     "any.required": "Trường Category là bắt buộc",

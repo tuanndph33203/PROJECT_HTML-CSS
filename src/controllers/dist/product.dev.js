@@ -17,20 +17,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var ProductController = {
   Create: function Create(req, res) {
-    var _req$body, name, tags, image, gallery, discount, description, category, attributes, _productSchema$valida, error, existedName, createdAttributes, price, product;
+    var _req$body, name, tags, image, gallery, discount, featured, description, category, attributes, _productSchema$valida, error, existedName, createdAttributes, price, product;
 
     return regeneratorRuntime.async(function Create$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
-            _req$body = req.body, name = _req$body.name, tags = _req$body.tags, image = _req$body.image, gallery = _req$body.gallery, discount = _req$body.discount, description = _req$body.description, category = _req$body.category, attributes = _req$body.attributes;
+            _req$body = req.body, name = _req$body.name, tags = _req$body.tags, image = _req$body.image, gallery = _req$body.gallery, discount = _req$body.discount, featured = _req$body.featured, description = _req$body.description, category = _req$body.category, attributes = _req$body.attributes;
             _productSchema$valida = _product.productSchema.validate({
               name: name,
               tags: tags,
               image: image,
               gallery: gallery,
               discount: discount,
+              featured: featured,
               description: description,
               category: category,
               attributes: attributes
@@ -102,6 +103,7 @@ var ProductController = {
               image: image,
               gallery: gallery,
               discount: discount,
+              featured: featured,
               description: description,
               attributes: createdAttributes.map(function (attribute) {
                 return attribute._id;
@@ -131,37 +133,38 @@ var ProductController = {
     }, null, null, [[0, 20]]);
   },
   Update: function Update(req, res) {
-    var productId, existingProduct, _req$body2, name, tags, image, gallery, discount, description, category, attributes, _productSchema$valida2, error, updatedAttributes, price;
+    var productId, existingProduct, _req$body2, name, tags, image, gallery, discount, featured, description, category, attributes, _productSchema$valida2, error, updatedAttributes, price;
 
-    return regeneratorRuntime.async(function Update$(_context5) {
+    return regeneratorRuntime.async(function Update$(_context4) {
       while (1) {
-        switch (_context5.prev = _context5.next) {
+        switch (_context4.prev = _context4.next) {
           case 0:
-            _context5.prev = 0;
+            _context4.prev = 0;
             productId = req.params.id;
-            _context5.next = 4;
+            _context4.next = 4;
             return regeneratorRuntime.awrap(_product2["default"].findById(productId));
 
           case 4:
-            existingProduct = _context5.sent;
+            existingProduct = _context4.sent;
 
             if (existingProduct) {
-              _context5.next = 7;
+              _context4.next = 7;
               break;
             }
 
-            return _context5.abrupt("return", res.status(_httpStatusCodes.StatusCodes.NOT_FOUND).json({
+            return _context4.abrupt("return", res.status(_httpStatusCodes.StatusCodes.NOT_FOUND).json({
               message: "Không tìm thấy sản phẩm !"
             }));
 
           case 7:
-            _req$body2 = req.body, name = _req$body2.name, tags = _req$body2.tags, image = _req$body2.image, gallery = _req$body2.gallery, discount = _req$body2.discount, description = _req$body2.description, category = _req$body2.category, attributes = _req$body2.attributes;
+            _req$body2 = req.body, name = _req$body2.name, tags = _req$body2.tags, image = _req$body2.image, gallery = _req$body2.gallery, discount = _req$body2.discount, featured = _req$body2.featured, description = _req$body2.description, category = _req$body2.category, attributes = _req$body2.attributes;
             _productSchema$valida2 = _product.productSchema.validate({
               name: name,
               tags: tags,
               image: image,
               gallery: gallery,
               discount: discount,
+              featured: featured,
               description: description,
               category: category,
               attributes: attributes
@@ -170,27 +173,33 @@ var ProductController = {
             }), error = _productSchema$valida2.error;
 
             if (!error) {
-              _context5.next = 11;
+              _context4.next = 11;
               break;
             }
 
-            return _context5.abrupt("return", res.status(_httpStatusCodes.StatusCodes.BAD_REQUEST).json({
+            return _context4.abrupt("return", res.status(_httpStatusCodes.StatusCodes.BAD_REQUEST).json({
               message: error.details.map(function (value) {
                 return value.message;
               })
             }));
 
           case 11:
-            _context5.next = 13;
-            return regeneratorRuntime.awrap(Promise.all(existingProduct.attributes.map(function _callee2(value) {
+            console.log(attributes);
+            _context4.next = 14;
+            return regeneratorRuntime.awrap(Promise.all(attributes.map(function _callee2(value) {
+              var data;
               return regeneratorRuntime.async(function _callee2$(_context3) {
                 while (1) {
                   switch (_context3.prev = _context3.next) {
                     case 0:
                       _context3.next = 2;
-                      return regeneratorRuntime.awrap((0, _attribute.deleteAttribute)(value._id));
+                      return regeneratorRuntime.awrap((0, _attribute.updateAttribute)(value));
 
                     case 2:
+                      data = _context3.sent;
+                      return _context3.abrupt("return", data);
+
+                    case 4:
                     case "end":
                       return _context3.stop();
                   }
@@ -198,31 +207,11 @@ var ProductController = {
               });
             })));
 
-          case 13:
-            _context5.next = 15;
-            return regeneratorRuntime.awrap(Promise.all(attributes.map(function _callee3(value) {
-              var data;
-              return regeneratorRuntime.async(function _callee3$(_context4) {
-                while (1) {
-                  switch (_context4.prev = _context4.next) {
-                    case 0:
-                      _context4.next = 2;
-                      return regeneratorRuntime.awrap((0, _attribute.createAttribute)(value));
-
-                    case 2:
-                      data = _context4.sent;
-                      return _context4.abrupt("return", data);
-
-                    case 4:
-                    case "end":
-                      return _context4.stop();
-                  }
-                }
-              });
-            })));
-
-          case 15:
-            updatedAttributes = _context5.sent;
+          case 14:
+            updatedAttributes = _context4.sent;
+            console.log(updatedAttributes.map(function (attribute) {
+              return attribute._id;
+            }));
             price = updatedAttributes[0].values[0].price;
             existingProduct.name = name;
             existingProduct.tags = tags;
@@ -230,78 +219,79 @@ var ProductController = {
             existingProduct.gallery = gallery;
             existingProduct.price = price ? price : 999999999;
             existingProduct.discount = discount;
+            existingProduct.featured = featured;
             existingProduct.description = description;
             existingProduct.attributes = updatedAttributes.map(function (attribute) {
               return attribute._id;
             });
             existingProduct.category = category;
-            _context5.next = 28;
+            _context4.next = 29;
             return regeneratorRuntime.awrap(existingProduct.save());
 
-          case 28:
-            return _context5.abrupt("return", res.status(_httpStatusCodes.StatusCodes.OK).json({
+          case 29:
+            return _context4.abrupt("return", res.status(_httpStatusCodes.StatusCodes.OK).json({
               message: "Sửa sản phẩm thành công !",
               existingProduct: existingProduct
             }));
 
-          case 31:
-            _context5.prev = 31;
-            _context5.t0 = _context5["catch"](0);
+          case 32:
+            _context4.prev = 32;
+            _context4.t0 = _context4["catch"](0);
             res.status(_httpStatusCodes.StatusCodes.INTERNAL_SERVER_ERROR).json({
-              message: "Error" + _context5.t0
+              message: "Error" + _context4.t0
             });
 
-          case 34:
+          case 35:
           case "end":
-            return _context5.stop();
+            return _context4.stop();
         }
       }
-    }, null, null, [[0, 31]]);
+    }, null, null, [[0, 32]]);
   },
   All: function All(req, res) {
     var products;
-    return regeneratorRuntime.async(function All$(_context6) {
+    return regeneratorRuntime.async(function All$(_context5) {
       while (1) {
-        switch (_context6.prev = _context6.next) {
+        switch (_context5.prev = _context5.next) {
           case 0:
-            _context6.prev = 0;
-            _context6.next = 3;
+            _context5.prev = 0;
+            _context5.next = 3;
             return regeneratorRuntime.awrap(_product2["default"].find().populate({
               path: "attributes"
             }).populate("category"));
 
           case 3:
-            products = _context6.sent;
+            products = _context5.sent;
             res.status(_httpStatusCodes.StatusCodes.OK).json({
               message: "Lấy tất cả sản phẩm thành công !",
               data: products
             });
-            _context6.next = 10;
+            _context5.next = 10;
             break;
 
           case 7:
-            _context6.prev = 7;
-            _context6.t0 = _context6["catch"](0);
+            _context5.prev = 7;
+            _context5.t0 = _context5["catch"](0);
             res.status(_httpStatusCodes.StatusCodes.INTERNAL_SERVER_ERROR).json({
-              message: "Error: " + _context6.t0.message
+              message: "Error: " + _context5.t0.message
             });
 
           case 10:
           case "end":
-            return _context6.stop();
+            return _context5.stop();
         }
       }
     }, null, null, [[0, 7]]);
   },
   Limit: function Limit(req, res) {
     var limit, latestProducts;
-    return regeneratorRuntime.async(function Limit$(_context7) {
+    return regeneratorRuntime.async(function Limit$(_context6) {
       while (1) {
-        switch (_context7.prev = _context7.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
-            _context7.prev = 0;
+            _context6.prev = 0;
             limit = parseInt(req.params.limit);
-            _context7.next = 4;
+            _context6.next = 4;
             return regeneratorRuntime.awrap(_product2["default"].find().sort({
               createdAt: -1
             }).limit(limit).populate({
@@ -312,50 +302,50 @@ var ProductController = {
             }).populate("category"));
 
           case 4:
-            latestProducts = _context7.sent;
+            latestProducts = _context6.sent;
             res.status(_httpStatusCodes.StatusCodes.OK).json({
               message: "L\u1EA5y ".concat(limit, " s\u1EA3n ph\u1EA9m th\xE0nh c\xF4ng !"),
               data: latestProducts
             });
-            _context7.next = 11;
+            _context6.next = 11;
             break;
 
           case 8:
-            _context7.prev = 8;
-            _context7.t0 = _context7["catch"](0);
+            _context6.prev = 8;
+            _context6.t0 = _context6["catch"](0);
             res.status(_httpStatusCodes.StatusCodes.INTERNAL_SERVER_ERROR).json({
-              message: "Error: " + _context7.t0.message
+              message: "Error: " + _context6.t0.message
             });
 
           case 11:
           case "end":
-            return _context7.stop();
+            return _context6.stop();
         }
       }
     }, null, null, [[0, 8]]);
   },
   Detail: function Detail(req, res) {
     var slug, product;
-    return regeneratorRuntime.async(function Detail$(_context8) {
+    return regeneratorRuntime.async(function Detail$(_context7) {
       while (1) {
-        switch (_context8.prev = _context8.next) {
+        switch (_context7.prev = _context7.next) {
           case 0:
-            _context8.prev = 0;
+            _context7.prev = 0;
             slug = req.params.slug;
-            _context8.next = 4;
+            _context7.next = 4;
             return regeneratorRuntime.awrap(_product2["default"].findOne({
               slug: slug
-            }).populate("attributes").populate("category"));
+            }).populate("attributes"));
 
           case 4:
-            product = _context8.sent;
+            product = _context7.sent;
 
             if (product) {
-              _context8.next = 7;
+              _context7.next = 7;
               break;
             }
 
-            return _context8.abrupt("return", res.status(_httpStatusCodes.StatusCodes.BAD_REQUEST).json({
+            return _context7.abrupt("return", res.status(_httpStatusCodes.StatusCodes.BAD_REQUEST).json({
               message: "Sản phẩm không tồn tại !"
             }));
 
@@ -365,84 +355,84 @@ var ProductController = {
               data: product,
               slug: slug
             });
-            _context8.next = 13;
+            _context7.next = 13;
             break;
 
           case 10:
-            _context8.prev = 10;
-            _context8.t0 = _context8["catch"](0);
+            _context7.prev = 10;
+            _context7.t0 = _context7["catch"](0);
             res.status(_httpStatusCodes.StatusCodes.INTERNAL_SERVER_ERROR).json({
-              message: "Error" + _context8.t0
+              message: "Error" + _context7.t0
             });
 
           case 13:
           case "end":
-            return _context8.stop();
+            return _context7.stop();
         }
       }
     }, null, null, [[0, 10]]);
   },
   Delete: function Delete(req, res) {
     var existingProduct;
-    return regeneratorRuntime.async(function Delete$(_context10) {
+    return regeneratorRuntime.async(function Delete$(_context9) {
       while (1) {
-        switch (_context10.prev = _context10.next) {
+        switch (_context9.prev = _context9.next) {
           case 0:
-            _context10.prev = 0;
-            _context10.next = 3;
+            _context9.prev = 0;
+            _context9.next = 3;
             return regeneratorRuntime.awrap(_product2["default"].findById(req.params.id));
 
           case 3:
-            existingProduct = _context10.sent;
+            existingProduct = _context9.sent;
 
             if (existingProduct) {
-              _context10.next = 6;
+              _context9.next = 6;
               break;
             }
 
-            return _context10.abrupt("return", res.status(_httpStatusCodes.StatusCodes.NOT_FOUND).json({
+            return _context9.abrupt("return", res.status(_httpStatusCodes.StatusCodes.NOT_FOUND).json({
               message: "Không tìm thấy sản phẩm !"
             }));
 
           case 6:
-            _context10.next = 8;
-            return regeneratorRuntime.awrap(Promise.all(existingProduct.attributes.map(function _callee4(value) {
-              return regeneratorRuntime.async(function _callee4$(_context9) {
+            _context9.next = 8;
+            return regeneratorRuntime.awrap(Promise.all(existingProduct.attributes.map(function _callee3(value) {
+              return regeneratorRuntime.async(function _callee3$(_context8) {
                 while (1) {
-                  switch (_context9.prev = _context9.next) {
+                  switch (_context8.prev = _context8.next) {
                     case 0:
-                      _context9.next = 2;
+                      _context8.next = 2;
                       return regeneratorRuntime.awrap((0, _attribute.deleteAttribute)(value._id));
 
                     case 2:
                     case "end":
-                      return _context9.stop();
+                      return _context8.stop();
                   }
                 }
               });
             })));
 
           case 8:
-            _context10.next = 10;
+            _context9.next = 10;
             return regeneratorRuntime.awrap(_product2["default"].findByIdAndDelete(req.params.id));
 
           case 10:
             res.status(_httpStatusCodes.StatusCodes.OK).json({
               message: "Xóa sản phẩm thành công !"
             });
-            _context10.next = 16;
+            _context9.next = 16;
             break;
 
           case 13:
-            _context10.prev = 13;
-            _context10.t0 = _context10["catch"](0);
+            _context9.prev = 13;
+            _context9.t0 = _context9["catch"](0);
             res.status(_httpStatusCodes.StatusCodes.INTERNAL_SERVER_ERROR).json({
-              message: "Error" + _context10.t0
+              message: "Error" + _context9.t0
             });
 
           case 16:
           case "end":
-            return _context10.stop();
+            return _context9.stop();
         }
       }
     }, null, null, [[0, 13]]);

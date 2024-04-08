@@ -15,6 +15,7 @@ const ProductController = {
         image,
         gallery,
         discount,
+        featured,
         description,
         category,
         attributes,
@@ -26,6 +27,7 @@ const ProductController = {
           image,
           gallery,
           discount,
+          featured,
           description,
           category,
           attributes,
@@ -60,6 +62,7 @@ const ProductController = {
         image,
         gallery,
         discount,
+        featured,
         description,
         attributes: createdAttributes.map((attribute) => attribute._id),
         category,
@@ -89,6 +92,7 @@ const ProductController = {
         image,
         gallery,
         discount,
+        featured,
         description,
         category,
         attributes,
@@ -100,6 +104,7 @@ const ProductController = {
           image,
           gallery,
           discount,
+          featured,
           description,
           category,
           attributes,
@@ -113,17 +118,14 @@ const ProductController = {
           }),
         });
       }
-      await Promise.all(
-        existingProduct.attributes.map(async (value) => {
-          await deleteAttribute(value._id);
-        })
-      );
+      console.log(attributes);
       const updatedAttributes = await Promise.all(
         attributes.map(async (value) => {
-          const data = await createAttribute(value);
+          const data = await updateAttribute(value);
           return data;
         })
       );
+      console.log(updatedAttributes.map((attribute) => (attribute._id)));
       const price = updatedAttributes[0].values[0].price;
       existingProduct.name = name;
       existingProduct.tags = tags;
@@ -131,6 +133,7 @@ const ProductController = {
       existingProduct.gallery = gallery;
       existingProduct.price = price ? price : 999999999;
       existingProduct.discount = discount;
+      existingProduct.featured = featured;
       existingProduct.description = description;
       existingProduct.attributes = updatedAttributes.map((attribute) => attribute._id);
       existingProduct.category = category;
@@ -193,7 +196,6 @@ const ProductController = {
       const slug = req.params.slug;
       const product = await ProductModel.findOne({ slug: slug })
         .populate("attributes")
-        .populate("category");
       if (!product) {
         return res.status(StatusCodes.BAD_REQUEST).json({
           message: "Sản phẩm không tồn tại !",
