@@ -11,6 +11,8 @@ function Statistical() {
       mutate(product);
     }
   };
+  console.log(products);
+  
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error</p>;
   return (
@@ -50,7 +52,7 @@ function Statistical() {
             <p className="font-medium">Price</p>
           </div>
           <div className="col-span-1 flex items-center">
-            <p className="font-medium">Stock</p>
+            <p className="font-medium">Discount</p>
           </div>
           <div className="col-span-1 flex items-center">
             <p className="font-medium">Action</p>
@@ -68,13 +70,13 @@ function Statistical() {
                 </div>
               </div>
               <div className="col-span-2 hidden items-center sm:flex">
-                <p className="font-medium text-sm text-black dark:text-white">{value.category}</p>
+                <p className="font-medium text-sm text-black dark:text-white">{value.category.name}</p>
               </div>
               <div className="col-span-1 flex items-center">
                 <p className="font-medium text-sm text-black dark:text-white">{value.price}</p>
               </div>
               <div className="col-span-1 flex items-center">
-                <p className="font-medium text-sm text-black dark:text-white">{value.category}</p>
+                <p className="font-medium text-sm text-black dark:text-white">{value.discount}</p>
               </div>
               <div className="col-span-1 flex items-center">
                 <Link to={`/admin/product/${value.slug}`} className="hover:text-primary mr-4">

@@ -8,6 +8,7 @@ import ImageUploader from "./components/ImageUploader";
 import ColorPicker from "./components/Attribute";
 import FormInput from "./components/FormInput";
 import FormTags from "./components/FormTags";
+import FormCheckBox from "./components/FormCheckbox";
 
 const ProductDetail = () => {
     const { slug } = useParams();
@@ -19,18 +20,28 @@ const ProductDetail = () => {
     useEffect(() => {
         if (product) {
             setUpdatedProduct(product);
-            setAttributes(product.attributes[0].values)
+            if (product.attributes[0]) {
+                setAttributes(product.attributes[0].values)
+            }
         }
     }, [product]);
-    console.log(updatedProduct);
+    useEffect(() => {
+        if (product && attributes.length > 0) {
+            setUpdatedProduct((prevProduct: any) => ({
+                ...prevProduct,
+                attributes: [{ ...prevProduct.attributes[0], values: attributes }]
+            }));
+        }
+    }, [attributes]);
 
+    console.log(updatedProduct);
     if (productIsLoading || categoryIsLoading) return <p>Loading...</p>;
     if (productIsError || categoryIsError) return <p>Error</p>;
     const handleUpdateProduct = async (event: any) => {
         event.preventDefault();
         try {
-            const { name, price, image, description, discount, stock, category } = updatedProduct;
-            const { error } = productValidate({ name, price, image, description, discount, stock, category });
+            const { name, image, description, discount, tags, attributes, category } = updatedProduct;
+            const { error } = productValidate({ name, image, description, discount, tags, attributes, category });
             if (error) {
                 alert(error);
             } else {
@@ -41,12 +52,12 @@ const ProductDetail = () => {
         }
     };
     const handleChange = (event: any) => {
-        const { name, value } = event.target;
+        const { name, value, checked } = event.target;
+        const newValue = event.target.type === 'checkbox' ? checked : value;
         setUpdatedProduct({
             ...updatedProduct,
-            [name]: value,
+            [name]: newValue,
         });
-        console.log(updatedProduct);
     };
 
     return (
@@ -113,15 +124,6 @@ const ProductDetail = () => {
                                     </div>
                                     <div className="mb-5 flex flex-col gap-5 sm:flex-row">
                                         <FormInput
-                                            label="Price"
-                                            name="price"
-                                            type="number"
-                                            value={product.price || ''}
-                                            onChange={handleChange}
-                                            placeholder="price"
-                                            min={0}
-                                        />
-                                        <FormInput
                                             label="Discount"
                                             name="discount"
                                             type="number"
@@ -130,12 +132,20 @@ const ProductDetail = () => {
                                             placeholder="discount"
                                             min={0}
                                         />
+                                        <FormCheckBox
+                                            label="Featured"
+                                            name="featured"
+                                            type="checkbox"
+                                            value={product.featured || false}
+                                            onChange={handleChange}
+                                            note="(Bán Chạy Trong Tuần *)"
+                                        ></FormCheckBox>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <ColorPicker attributes={attributes} setAttributes={setAttributes} ></ColorPicker>
-                        <ImageUploader setProduct={setUpdatedProduct} product={updatedProduct} handleCreateProduct={handleUpdateProduct} />
+                        <ImageUploader setProduct={setUpdatedProduct} product={updatedProduct} handleCreateProduct={handleUpdateProduct} btn={"Update Product"} />
                     </div>
                 </div>
             </div>

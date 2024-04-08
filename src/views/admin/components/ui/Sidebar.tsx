@@ -7,7 +7,7 @@ const Sidebar = (props: any) => {
   };
 
   return (
-    <aside className={`absolute text-white left-0 top-0 z-9999 flex h-screen w-[300px] flex-col overflow-y-hidden bg-[#1C2434] duration-300 ease-linear dark:bg-boxdark ${props.sidebar ? 'translate-x-0' : '-translate-x-full'}`}>
+    <aside className={`absolute text-white left-0 top-0 z-50 flex h-screen w-[300px] flex-col overflow-y-hidden bg-[#1C2434] duration-300 ease-linear dark:bg-boxdark ${props.sidebar ? 'translate-x-0' : '-translate-x-full'}`}>
       <div className="overflow-y-auto">
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
           <div>

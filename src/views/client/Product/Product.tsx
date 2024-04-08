@@ -1,12 +1,25 @@
 import useProductQuery from "@/hooks/useProducts";
 import "@/style/detail.scss"
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
 const Product = () => {
     const { slug } = useParams();
-    console.log(slug);
-
     const { data: product, isLoading, isError } = useProductQuery({ slug });
-    console.log(product);
+    const [selectedColor, setSelectedColor] = useState<any>({
+        nameValue: "",
+        price : 0,
+        stock : 0
+    });
+    const handleColorClick = (value:any) => {
+        setSelectedColor(value);
+    };
+    useEffect(() => {
+        if (product) {
+            console.log(product);
+            setSelectedColor(product.attributes[0].values[0]);
+        }
+    }, [product])
+
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error</p>;
     return (
@@ -36,7 +49,7 @@ const Product = () => {
                     <div className="info">
                         <div className="info-product">
                             <h2 className="product__title">{product.name}</h2>
-                            <span className="info__price">{product.price - product.discount * product.price / 100}<sub>đ</sub></span>
+                            <span className="info__price">{selectedColor.price - product.discount * product.price / 100}<sub>đ</sub></span>
                             <div className="star">
                                 <div className="star-list">
                                     <img className="star__item" src="/assets/image/detail/star.svg" />
@@ -50,13 +63,21 @@ const Product = () => {
                             <p>Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero
                                 with a well-balanced audio which boasts a clear midrange and extended highs for a sound.
                             </p>
-
                             <div className="mt-4">
                                 <span >Color</span>
-                                {product.attributes.map((attribute: { values: { nameValue: string }[] }, index: number) => (
+                                {product.attributes.map((attribute: { values: { nameValue: string, price: number }[] }, index: number) => (
                                     <div className="color" key={index}>
-                                        {attribute.values.map((value: { nameValue: string }, idx: number) => (
-                                            <div key={idx} style={{ backgroundColor: value.nameValue }} className="color__item" />
+                                        {attribute.values.map((value: any, idx: number) => (
+                                            <div
+                                                onClick={value.stock > 0 ? () => handleColorClick(value) : undefined}
+                                                key={idx}
+                                                style={{
+                                                    backgroundColor: value.nameValue,
+                                                    border: value.nameValue === selectedColor.nameValue ? '2px solid black' : 'none',
+                                                    opacity :  value.stock > 0 ? '' : 0.1,
+                                                }}
+                                                className={`color__item cursor-pointer`}
+                                            />
                                         ))}
                                     </div>
                                 ))}
@@ -68,7 +89,7 @@ const Product = () => {
                                     <span id="plus">+</span>
                                 </div>
                                 <Link to="/cart" className="btn">Add To Cart</Link>
-                                <button>+ Compare</button>
+                                <button className="btn">+ Compare</button>
                             </div>
                         </div>
                         <div className="info">

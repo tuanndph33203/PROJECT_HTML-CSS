@@ -7,7 +7,7 @@ export const productValidate = (product: any) => {
         tags: Joi.array(),
         attributes: Joi.array(),
         gallery: Joi.array(),
-        price: Joi.number().required().min(1000),
+        featured: Joi.boolean(),
         category: Joi.string().required(),
         image: Joi.string().required(),
         description: Joi.string().required(),

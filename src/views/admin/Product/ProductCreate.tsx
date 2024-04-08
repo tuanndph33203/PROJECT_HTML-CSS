@@ -7,6 +7,7 @@ import ColorPicker from "./components/Attribute";
 import ImageUploader from "./components/ImageUploader";
 import FormInput from "./components/FormInput";
 import FormTags from "./components/FormTags";
+import FormCheckBox from "./components/FormCheckbox";
 
 interface ColorItem {
     color: string;
@@ -17,7 +18,6 @@ const ProductCreate = () => {
     const [attributes, setAttributes] = useState<ColorItem[]>([]);
     const { data, isLoading, isError } = useCategoryQuery();
     const [product, setProduct] = useState<any>({});
-    console.log(data);
     const handleCreateProduct = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
@@ -32,12 +32,14 @@ const ProductCreate = () => {
         }
     };
     const handleChange = (event: any) => {
-        console.log(product);
-        const { name, value } = event.target;
+        const { name, value, checked } = event.target;
+        const newValue = event.target.type === 'checkbox' ? checked : value;
         setProduct({
             ...product,
-            [name]: value,
+            [name]: newValue,
         });
+        console.log(product);
+
     };
     useEffect(() => {
         setProduct({
@@ -45,7 +47,7 @@ const ProductCreate = () => {
             attributes,
         });
         console.log(product);
-        
+
     }, [attributes])
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error</p>;
@@ -116,15 +118,6 @@ const ProductCreate = () => {
                                     </div>
                                     <div className="mb-5 flex flex-col gap-5 sm:flex-row">
                                         <FormInput
-                                            label="Price"
-                                            name="price"
-                                            type="number"
-                                            value={product.price || ''}
-                                            onChange={handleChange}
-                                            placeholder="price"
-                                            min={0}
-                                        />
-                                        <FormInput
                                             label="Discount"
                                             name="discount"
                                             type="number"
@@ -133,12 +126,20 @@ const ProductCreate = () => {
                                             placeholder="discount"
                                             min={0}
                                         />
+                                        <FormCheckBox
+                                            label="Featured"
+                                            name="featured"
+                                            type="checkbox"
+                                            value={product.featured || false}
+                                            onChange={handleChange}
+                                            note="(Bán Chạy Trong Tuần *)"
+                                        ></FormCheckBox>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <ColorPicker attributes={attributes} setAttributes={setAttributes} />
-                        <ImageUploader setProduct={setProduct} product={product} handleCreateProduct={handleCreateProduct} />
+                        <ImageUploader setProduct={setProduct} product={product} handleCreateProduct={handleCreateProduct} btn={'Create Product'} />
                     </div>
                 </div>
             </div>

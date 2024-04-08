@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const ImageUploader = ({ setProduct, product, handleCreateProduct }: any) => {
+const ImageUploader = ({ setProduct, product, handleCreateProduct, btn }: any) => {
     const [files, setFiles] = useState<string[]>([]);
     useEffect(() => {
         if (product.gallery) {
@@ -9,16 +9,16 @@ const ImageUploader = ({ setProduct, product, handleCreateProduct }: any) => {
     })
     const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFiles = event.target.files;
+        console.log(selectedFiles);
         if (selectedFiles) {
             const fileNames = Array.from(selectedFiles).map(file => file.name);
-            const remainingSlots = 4 - files.length;
-            if (fileNames.length > remainingSlots) {
-                alert(`Bạn chỉ được phép tải lên tối đa ${remainingSlots} ảnh.`);
+            if (fileNames.length > 4) {
+                alert(`Bạn chỉ được phép tải lên tối đa 4 ảnh.`);
                 return;
-            }
+            };
             setProduct({
                 ...product,
-                image : fileNames[0],
+                image: fileNames[0],
                 gallery: fileNames
             });
             setFiles(fileNames);
@@ -62,7 +62,7 @@ const ImageUploader = ({ setProduct, product, handleCreateProduct }: any) => {
                     </div>
                     <div className="flex justify-center gap-5">
                         <button onClick={handleCreateProduct} className="flex justify-center rounded bg-sky-600 py-2 px-6 font-normal text-gray hover:bg-opacity-90" type="submit">
-                            Create Product
+                            {btn}
                         </button>
                     </div>
                 </div>

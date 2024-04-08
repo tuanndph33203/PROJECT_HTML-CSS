@@ -1,3 +1,4 @@
+
 export interface IProduct {
     _id?: number | string,
     name: string,
@@ -10,5 +11,5 @@ export interface IProduct {
     description: string,
     discount: number,
     featured: boolean,
-    category: string
+    category: string | any
 }
