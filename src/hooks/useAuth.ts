@@ -1,13 +1,18 @@
 import Toast from "@/components/Toast";
 import { login, register } from "@/services/auth";
 import { useMutation } from "@tanstack/react-query";
-import { useSessionStorage } from "@/hooks/useStorage";
+import { useContext } from "react";
+import UserContext from "@/context/UserContext";
 
 type useAuthMutationProps = {
     action: "REGISTER" | "LOGIN";
 }
 const useAuthMutation = ({ action }: useAuthMutationProps) => {
-    const [session, setSession] = useSessionStorage('user', '');
+    const userContext = useContext(UserContext);
+    if (!userContext) {
+        throw new Error('UserContext chưa được khởi tạo');
+    }
+    const { value, setValue }  = userContext
     const { mutate, ...rest } = useMutation({
         mutationFn: async (user: any) => {
             switch (action) {
@@ -29,22 +34,19 @@ const useAuthMutation = ({ action }: useAuthMutationProps) => {
             }
         },
         onSuccess: async (data: any) => {
-            setSession(data.user);
-            console.log("Success data:", data);
+            setValue(data.user);
             Toast({ type: "success", report: data.message });
         },
         onError: (error: any) => {
             console.log(error);
-            console.log(error.response.data.message);
             const message = error.response.data.message;
-            console.log(message);
             message.map((value:string) => {
                 Toast({type:"error",report:value})
             })  
         }
     });
 
-    return { mutate, session, ...rest }; 
+    return { mutate, value, ...rest }; 
 };
 
 export default useAuthMutation;

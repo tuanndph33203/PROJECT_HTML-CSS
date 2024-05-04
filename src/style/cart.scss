@@ -34,11 +34,11 @@
         margin: 3px;
         font-size: 10px;
         @include m.breakpoint(sm) {
-            padding: 7px;
+            padding: 1px;
             font-size: 13px;
         }
         @include m.breakpoint(md) {
-            padding: 15px;
+            padding: 2px;
             font-size: 16px;
         }
         img{
@@ -46,10 +46,6 @@
             background-color: #F9F1E7;
             margin: 5px;
             border-radius: 5px;
-        }
-        input{
-            width:30px;
-            height: 20px;
         }
     }
     &-bin{

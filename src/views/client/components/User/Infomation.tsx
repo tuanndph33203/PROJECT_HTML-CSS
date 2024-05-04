@@ -1,14 +1,22 @@
-import { useLocalStorage, useSessionStorage } from "@/hooks/useStorage";
+import UserContext from "@/context/UserContext";
+import { useLocalStorage } from "@/hooks/useStorage";
 import "@/style/user.scss";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-const Infomation = (props: any) => {
-    const [, , remove] = useSessionStorage('user', '');
+const Infomation = (props : any) => {
+    const userContext = useContext(UserContext);
     const [, , removeToken] = useLocalStorage('token', '');
     const handleLogout = () => {
-        remove()
-        removeToken()
-        props.setLogin(false);
+            const logout = async () => {
+                if (userContext) {
+                    await userContext.removeValue();
+                    props.setValue(false);
+                }
+                removeToken();
+            };
+    
+            logout();
     }
     return (
         <div className="login-boxs">

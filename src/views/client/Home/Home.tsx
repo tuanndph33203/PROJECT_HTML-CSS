@@ -1,12 +1,27 @@
+import useCartMutation from "@/hooks/useCart";
 import useProductQuery from "@/hooks/useProducts";
 import "@/style/style.scss";
 import { Link } from "react-router-dom";
 const Home = () => {
   const { data, isLoading, isError } = useProductQuery({ quantity: 4 });
-  console.log(data);
-  
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error</p>;
+  const { mutate } = useCartMutation({ action: "CREATE" });
+  const handleCart = (id: string) => {
+    const userString = sessionStorage.getItem('user');
+    if (userString) {
+      const user = JSON.parse(userString);
+      if (user) {
+        mutate({
+          userId: user._id,
+          productId: id,
+          quantity: 1
+        })
+      } else {
+        alert("Vui lòng đăng nhập để sử dụng chức năng !");
+      }
+    }
+  }
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error</p>;
   return (
     <>
       <section className="news">
@@ -35,7 +50,7 @@ const Home = () => {
                     </div>
                     <div className="product-actions">
                       <Link to={`/product/${value.slug}`} className="btn product-action__quickview">View Product</Link>
-                      <button className="btn product-action__addtocart">Add To Cart</button>
+                      <button onClick={() => handleCart(value._id)} className="btn product-action__addtocart">Add To Cart</button>
                       <div className="product-actions-more">
                         <div className="product-action-more-share">
                           <img className="product-action-more__icon" src="../assets/image/icons/share.svg" />
