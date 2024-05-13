@@ -4,7 +4,10 @@ import useCartMutation from "@/hooks/useCart";
 import useCartQuery from "@/hooks/useQueryCart";
 import "@/style/cart.scss"
 import { useContext } from "react";
-const Cart = () => {
+import { useNavigate } from "react-router-dom";
+const Cart = ({ setOrders, setPage }: any) => {
+    setPage("Cart")
+    const navigate = useNavigate()
     const userContext = useContext(UserContext);
     const { mutate: mutateDelete } = useCartMutation({ action: "DELETE" })
     const { mutate: mutateQuantity } = useCartMutation({ action: "QUANTITY" })
@@ -26,18 +29,29 @@ const Cart = () => {
             productId: id
         })
     }
+    const checkout = () => {
+        const orders = data.products.map((item: any) => (
+            {
+                _id: item.product._id,
+                name: item.product.name,
+                price: item.product.price - (item.product.price * item.product.discount) / 100,
+                quantity: item.quantity
+            }))
+        setOrders(orders);
+        navigate("/checkout");
+    }
     let totalSave = 0;
     let totalCart = 0;
     return (
         <section className="cart">
             <div className="cart-container">
                 <div className="cart-list">
-                    <table className="cart-table">
+                    <table className="cart-table w-full border-collapse">
                         <thead>
                             <tr>
                                 <th colSpan={2} className="cart__item">Product</th>
                                 <th className="cart__item">Price</th>
-                                <th className="cart__item w-[130px]">Quantity</th>
+                                <th className="cart__item w-[70px] md:w-[130px]">Quantity</th>
                                 <th className="cart__item">Subtutal</th>
                                 <th className="cart__item" />
                             </tr>
@@ -56,11 +70,11 @@ const Cart = () => {
                                             </td>
                                             <td className="cart__item text-left">{item.product.name}</td>
                                             <td className="cart__item" id="price">{formatCurrency(price)}</td>
-                                            <td className="flex text-center leading-[70px]">
+                                            <td className=" cart__item flex justify-between items-center leading-[70px]">
                                                 <div className="increase cursor-pointer" onClick={() => productQuantity("increase", item.product._id)}>+</div>
                                                 <input
-                                                    className="text-center border-none bg-transparent text-gray-800 focus:outline-none w-[120px]"
-                                                    defaultValue={item.quantity}
+                                                    className="w-[40px] text-center border-none bg-transparent text-gray-800 focus:outline-none"
+                                                    value={item.quantity}
                                                     type="text"
                                                 />
                                                 <div className="decrease cursor-pointer" onClick={() => productQuantity("decrease", item.product._id)}>-</div>
@@ -92,7 +106,7 @@ const Cart = () => {
                         <h4>Total</h4>
                         <span id="total-price">{formatCurrency(totalCart)}</span>
                     </div>
-                    <a href="checkout.html" className="cart__checkout">Check Out</a>
+                    <button onClick={checkout} className="cart__checkout">Check Out</button>
                 </div>
             </div>
         </section>

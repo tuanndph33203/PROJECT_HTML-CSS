@@ -11,10 +11,8 @@ const User = (props: any) => {
   useEffect(() => {
     setIsLoggedIn(userContext?.value !== "")
   }, [userContext?.value])
-  console.log(isLoggedIn);
-  
   return (
-    <div style={{ display: props.active ? "flex" : "none" }} className="login" id="user">
+    <div style={{ display: props.active ? "flex" : "none" }} className="login" id="user" >
       <div className="login-form">
         <div className="login-close">
           <strong onClick={() => props.login(false)} className="login__close" id="close">X</strong>

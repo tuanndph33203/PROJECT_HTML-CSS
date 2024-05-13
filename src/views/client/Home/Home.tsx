@@ -2,7 +2,8 @@ import useCartMutation from "@/hooks/useCart";
 import useProductQuery from "@/hooks/useProducts";
 import "@/style/style.scss";
 import { Link } from "react-router-dom";
-const Home = () => {
+const Home = ({ setPage }: any) => {
+  setPage('Home Page')
   const { data, isLoading, isError } = useProductQuery({ quantity: 4 });
   const { mutate } = useCartMutation({ action: "CREATE" });
   const handleCart = (id: string) => {

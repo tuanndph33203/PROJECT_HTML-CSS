@@ -24,7 +24,7 @@ const Footer = () => {
                                     <a href="#" className="footer-menu-link">Blog</a>
                                 </li>
                                 <li className="footer-menu-item">
-                                    <a href="#" className="footer-menu-link">Contact</a>
+                                    <a href="#" className="footer-menu-link">Purchase</a>
                                 </li>
                             </ul>
                         </div>
@@ -41,7 +41,7 @@ const Footer = () => {
                                     <a href="#" className="footer-menu-link">Privacy Policies</a>
                                 </li>
                                 <li className="footer-menu-item">
-                                    <a href="#" className="footer-menu-link">Contact</a>
+                                    <a href="#" className="footer-menu-link">Purchase</a>
                                 </li>
                             </ul>
                         </div>

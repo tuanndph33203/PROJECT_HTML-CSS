@@ -2,7 +2,8 @@ import useCartMutation from "@/hooks/useCart";
 import useProductQuery from "@/hooks/useProducts.ts";
 import "@/style/shop.scss"
 import { Link } from "react-router-dom"
-const Shop = () => {
+const Shop = ({ setPage }: any) => {
+    setPage("Shop");
     const { data, isLoading, isError } = useProductQuery({});
     const { mutate } = useCartMutation({ action: "CREATE" });
   const handleCart = (id: string) => {

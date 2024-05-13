@@ -2,9 +2,11 @@ import useCartMutation from "@/hooks/useCart";
 import useProductQuery from "@/hooks/useProducts";
 import "@/style/detail.scss"
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
-const Product = () => {
+import { useNavigate, useParams } from "react-router-dom"
+const Product = ({ setOrders, setPage }: any) => {
+    setPage('Product')
     const { slug } = useParams();
+    const navigate = useNavigate()
     const { data: product, isLoading, isError } = useProductQuery({ slug });
     const { mutate } = useCartMutation({ action: "CREATE" });
     const [quantity, setQuantity] = useState<number>(1);
@@ -46,6 +48,19 @@ const Product = () => {
             alert("Vui lòng nhập lớn hơn 1 !");
         }
     }
+    const checkout = () => {
+        if (quantity >= 1) {
+            setOrders([
+                {
+                    _id: product._id,
+                    name: product.name,
+                    price: product.price - (product.price * product.discount) / 100,
+                    quantity: quantity,
+                }
+            ])
+            navigate('/checkout')
+        }
+    }
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Error</p>;
     return (
@@ -75,7 +90,7 @@ const Product = () => {
                     <div className="info">
                         <div className="info-product">
                             <h2 className="product__title">{product.name}</h2>
-                            <span className="info__price">{selectedColor.price - product.discount * product.price / 100}<sub>đ</sub></span>
+                            <span className="info__price">{selectedColor.price - product.discount * selectedColor.price / 100}<sub>đ</sub></span>
                             <div className="star">
                                 <div className="star-list">
                                     <img className="star__item" src="/assets/image/detail/star.svg" />
@@ -115,7 +130,7 @@ const Product = () => {
                                     <span onClick={() => handleQuantity(quantity + 1)} id="plus">+</span>
                                 </div>
                                 <button onClick={handleCart} className="btn">Add To Cart</button>
-                                <button className="btn">Buy</button>
+                                <button onClick={checkout} className="btn">Buy</button>
                             </div>
                         </div>
                         <div className="info">

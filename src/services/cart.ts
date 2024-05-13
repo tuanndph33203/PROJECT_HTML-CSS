@@ -20,9 +20,8 @@ export const deleteCart = async (data: {userId:string,productId:string}) => {
 export const quantityCart = async ({ action, userId, productId } : {action : string, userId:string,productId:string}) => {
     try {
         await axiosInstance.post(`http://localhost:3000/cart/${action}`, {userId,productId});
-        Toast({ type:"success",report:`Sửa Sản Phẩm Thành Công`});
     } catch (error) {
-        Toast({ type:"error",report:`Sửa Sản Phẩm Thất Bại`});
+        Toast({ type:"error",report:`Sửa số lượng Phẩm Thất Bại`});
         throw error;
     }
 };

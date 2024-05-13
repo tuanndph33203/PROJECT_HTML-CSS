@@ -31,7 +31,7 @@ function Header(props: any) {
                                 <Link to="/" className="main-menu__link">About</Link>
                             </li>
                             <li className="main-menu__item">
-                                <Link to="/" className="main-menu__link">Contact</Link>
+                                <Link to="/purchase" className="main-menu__link">Purchase</Link>
                             </li>
                         </ul>
                     </nav>
@@ -47,7 +47,7 @@ function Header(props: any) {
                                 <Link to="/" className="mobile-menu__link">About</Link>
                             </li>
                             <li className="mobile-menu__item">
-                                <Link to="/" className="mobile-menu__link">Contact</Link>
+                                <Link to="/purchase" className="mobile-menu__link">Purchase</Link>
                             </li>
                             <li className="mobile-menu__item">
                                 <Link onClick={handleOpen} to="/" className="mobile-menu__link">Account
