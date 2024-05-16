@@ -11,29 +11,30 @@ export const CartController = {
         },
       });
       if (!cart) {
-        return res
-          .status(StatusCodes.NOT_FOUND)
-          .json("Chưa có sản phẩm trong giỏ hàng !");
+        return res.status(StatusCodes.OK).json({
+          message: "Chưa có sản phẩm trong giỏ hàng !"
+        });
       }
       const cartData = {
         products: cart.products.map((item) => ({
-          productId: item.productId._id,
-          name: item.productId.name,
-          price: item.productId.price,
+          product: item.productId,
           quantity: item.quantity,
         })),
       };
-      return res.status(StatusCodes.OK).json(cartData);
+      return res.status(StatusCodes.OK).json({
+        data: cartData,
+        message: "Lấy giỏ hàng thành công !",
+      });
     } catch (error) {
       return res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
     }
   },
   addItemToCart: async (req, res) => {
-    const { userId, productId, quantity } = req.body;
+    const { userId, productId, attributeId, quantity } = req.body;
     try {
       let cart = await CartModel.findOne({ userId });
       if (!cart) {
-        cart = new Cart({ userId, products: [] });
+        cart = new CartModel({ userId, products: [] });
       }
       const existProductIndex = cart.products.findIndex(
         (item) => item.productId.toString() == productId
@@ -48,11 +49,11 @@ export const CartController = {
       return res.status(StatusCodes.OK).json({ cart });
     } catch (error) {
       return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ error: "Internal Server Error" });
+        .status(StatusCodes.BAD_REQUEST)  
+        .json({ error: error.message});
     }
   },
-  removeFromCart: async (req, res) => {
+  removeFromCart: async (req, res) => { 
     const { userId, productId } = req.params;
     try {
       let cart = await CartModel.findOne({ userId });
@@ -69,7 +70,7 @@ export const CartController = {
 
       await cart.save();
       return res.status(StatusCodes.OK).json({
-        message : "Xóa thành công !",
+        message: "Xóa thành công !",
         cart,
       });
     } catch (error) {
@@ -105,6 +106,7 @@ export const CartController = {
   // Tăng số lượng của sản phẩm trong giỏ hàng
   increaseProductQuantity: async (req, res) => {
     const { userId, productId } = req.body;
+    console.log(req.body);
     try {
       let cart = await CartModel.findOne({ userId });
 
@@ -146,8 +148,9 @@ export const CartController = {
 
       if (product.quantity > 1) {
         product.quantity--;
+      } else {
+        return res.status(400).json({ message: "Không thể giảm xuống dưới 1 !" });
       }
-
       await cart.save();
       res.status(200).json(cart);
     } catch (error) {
