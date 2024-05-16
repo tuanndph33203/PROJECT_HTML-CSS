@@ -5,7 +5,7 @@ const FormInput = (props: any) => {
             defaultValue={props.form}
             onChange={props.change}
             name={props.name}
-            className="checkout-input"
+            className="checkout-input px-2"
             type={props.type}
             placeholder={props.placeholder && props.placeholder}
         />

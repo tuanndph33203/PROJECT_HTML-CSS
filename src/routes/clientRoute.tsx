@@ -29,7 +29,7 @@ function Client() {
         <Route path='/checkout' element={<Checkout setPage={setPage} orders={orders} />} />
         <Route path='/product/:slug' element={<Product setPage={setPage} setOrders={setOrders}  />} />
         <Route path='/shop' element={<Shop setPage={setPage} />} />
-        <Route path='/purchase' element={<Purchase setPage={setPage} />} />
+        <Route path='/purchase/*' element={<Purchase setPage={setPage} />} />
       </Routes>
       <Services></Services>
       {/*End .services*/}

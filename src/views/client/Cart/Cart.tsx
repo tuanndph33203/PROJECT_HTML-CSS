@@ -3,10 +3,12 @@ import UserContext from "@/context/UserContext";
 import useCartMutation from "@/hooks/useCart";
 import useCartQuery from "@/hooks/useQueryCart";
 import "@/style/cart.scss"
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const Cart = ({ setOrders, setPage }: any) => {
-    setPage("Cart")
+    useEffect(() => {
+        setPage('Cart');
+    }, [setPage]);
     const navigate = useNavigate()
     const userContext = useContext(UserContext);
     const { mutate: mutateDelete } = useCartMutation({ action: "DELETE" })
@@ -75,6 +77,7 @@ const Cart = ({ setOrders, setPage }: any) => {
                                                 <input
                                                     className="w-[40px] text-center border-none bg-transparent text-gray-800 focus:outline-none"
                                                     value={item.quantity}
+                                                    readOnly
                                                     type="text"
                                                 />
                                                 <div className="decrease cursor-pointer" onClick={() => productQuantity("decrease", item.product._id)}>-</div>

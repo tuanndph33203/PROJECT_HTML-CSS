@@ -1,20 +1,36 @@
-const Purchase = ({ setPage } : any) => {
-    setPage("My Purchase")
+import {Route, Routes } from "react-router-dom";
+import ProgressBar from "./components/ProgressBar";
+import All from "./components/All";
+import Pay from "./components/Pay";
+import Ship from "./components/Ship";
+import Receive from "./components/Receive";
+import Completed from "./components/Completed";
+import Cancelled from "./components/Cancelled";
+import Return from "./components/Return";
+import { useEffect } from "react";
+
+const Purchase = ({ setPage }: any) => {
+    useEffect(() => {
+        setPage("My Purchase");
+    },[setPage])
     return (
         <>
-            <div className="box-border w-full">
-                <div className="grid grid-cols-7 p-5 text-center w-screen">
-                    <h3>All</h3>
-                    <h3>To Pay</h3>
-                    <h3>To Ship</h3>
-                    <h3>To Receive</h3>
-                    <h3>Completed</h3>
-                    <h3>Cancelled</h3>
-                    <h3>Return/Refund</h3>
+            <div className="bg-[#F5F5F5] p-[15px]">
+                <ProgressBar></ProgressBar>
+                <Routes>
+                    <Route path='' element={<All/>} />
+                    <Route path='/pay' element={<Pay/>} />
+                    <Route path='/ship' element={<Ship/>} />
+                    <Route path='/receive' element={<Receive/>} />
+                    <Route path='/completed' element={<Completed/>} />
+                    <Route path='/cancelled' element={<Cancelled/>} />
+                    <Route path='/return' element={<Return/>} />
+                </Routes>
+                <div className="box-border bg-white mt-[15px] h-[100px]">
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Purchase
+export default Purchase;

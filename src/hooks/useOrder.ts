@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Toast from "@/components/Toast";
+import { createOrder } from "@/services/order";
 type useOrderMutationProps = {
     action: "CREATE";
 }
@@ -9,10 +10,15 @@ const useOrderMutation = ({action} : useOrderMutationProps) => {
         mutationFn: async (data : any) => {
             switch (action) {
                 case "CREATE":
-                    await ({
+                    console.log(data);
+                    
+                    await createOrder({
                         userId : data.userId,
-                        productId : data.productId,
-                        quantity : data.quantity
+                        customerName: data.firstName + data.lastName,
+                        orderNumber : data.phone,
+                        orderAddress: `${data.company}-${data.country}-${data.streetAddress}-${data.city}-${data.zipCode}-${data.email}-${data.additionalInfo}`,
+                        totalPrice : data.total,
+                        items: data.items
                     });
                     break;
             }

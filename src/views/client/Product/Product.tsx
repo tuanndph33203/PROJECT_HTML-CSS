@@ -4,7 +4,9 @@ import "@/style/detail.scss"
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 const Product = ({ setOrders, setPage }: any) => {
-    setPage('Product')
+    useEffect(() => {
+        setPage('Product')
+    },[setPage])
     const { slug } = useParams();
     const navigate = useNavigate()
     const { data: product, isLoading, isError } = useProductQuery({ slug });

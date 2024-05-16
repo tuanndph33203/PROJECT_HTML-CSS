@@ -1,9 +1,12 @@
 import useCartMutation from "@/hooks/useCart";
 import useProductQuery from "@/hooks/useProducts";
 import "@/style/style.scss";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 const Home = ({ setPage }: any) => {
-  setPage('Home Page')
+  useEffect(() => {
+    setPage("Home Page")
+  }, [setPage])
   const { data, isLoading, isError } = useProductQuery({ quantity: 4 });
   const { mutate } = useCartMutation({ action: "CREATE" });
   const handleCart = (id: string) => {

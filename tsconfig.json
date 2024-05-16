@@ -24,6 +24,6 @@
       "@/*" : ["src/*"]
     }
   },
-  "include": ["src", "vite-env.d.ts"],
+  "include": ["src", "vite-env.d.ts", "src/views/client/Purchase/components/Completed.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
